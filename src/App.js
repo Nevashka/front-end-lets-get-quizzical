@@ -1,15 +1,20 @@
 import { default as Socket } from './Socket-io'
-import { Settings } from './pages'
+import { Routes, Route } from 'react-router-dom';
+import { Settings, Home, Room, Questions, Leaderboard } from './pages'
 
 import './App.css'
 function App() {
  
 
   return (
-    <div>
-      <Settings />
-      <Socket />
-    </div>
+    <>
+      <div id = 'app'>
+        <main>
+          <Settings />
+          <Socket />
+        </main>
+      </div>
+    </>
   );
 
 }
