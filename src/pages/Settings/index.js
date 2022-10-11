@@ -86,6 +86,20 @@ const Settings = () => {
                     margin="normal"
                 ></CssTextField>
 
+                <CssTextField
+                    id="roomName"
+                    label="Room Name"
+                    InputProps={{
+                        startAdornment: (
+                            <InputAdornment position="start">
+                                {/* <AccountCircle /> */}
+                            </InputAdornment>
+                        ),
+                    }}
+                    variant="standard"
+                    margin="normal"
+                />
+
                 <button>Start &#8594;</button>
             </form>
         </>
