@@ -7,15 +7,18 @@ form {
 }
 
 button {
-    border: 1px solid white;
-    border-radius: 15px;
+    border-style: none;
+    border-bottom: 1px solid white;
     width: fit-content;
     font-size: 20px;
     margin: 30px auto;
+    padding: 5px;
+    background-color: var(--bgBlue);
 }
 
 button:hover {
     border: 2px solid #01c9df;
+    border-radius: 15px;
     color: #01c9df;
 }
 
@@ -23,3 +26,14 @@ button:hover {
     margin-bottom: 5px;
 }
 
+.settings {
+    background-color: var(--bgBlue);
+}
+
+ul {
+    background-color: var(--lighterBlue);
+}
+
+#categories, #difficulties, #qtype {
+    color: whitesmoke;
+}
