@@ -15,12 +15,8 @@
     "react": "^18.2.0",
     "react-bootstrap": "^2.5.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.4.2",
-<<<<<<< HEAD
-    "react-scripts": "^5.0.1",
-=======
+    "react-router-dom": "6.4.2",
     "react-scripts": "5.0.1",
->>>>>>> 04ad71f7e56b2d345135a6232720cf3b80a32bc3
     "socket.io-client": "^4.5.2",
     "web-vitals": "^2.1.4"
   },
