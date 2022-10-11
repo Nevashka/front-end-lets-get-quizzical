@@ -6,6 +6,7 @@ node_modules/
 .pnp.js
 front-end-lets-get-quizzical\node_modules
 node_modules/.bin
+node_modules 
 
 # testing
 /coverage
