@@ -10,9 +10,15 @@ function App() {
     <>
       <div id = 'app'>
         <main>
-          <Settings />
-          <Socket />
+          <Routes>
+              <Route path='/' element={<Home/>}/>
+              <Route path='/Settings' element={<Settings/>}/>
+              <Route path='/Room' element={<Room/>}/>
+              <Route path='/Questions' element={<Questions/>}/>
+              <Route path='/Leaderboard' element={<Leaderboard/>}/>
+          </Routes>  
         </main>
+            <Socket />
       </div>
     </>
   );
