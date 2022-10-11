@@ -4,9 +4,14 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import InputAdornment from '@mui/material/InputAdornment';
 import { styled } from '@mui/material/styles'
 import MenuItem from '@mui/material/MenuItem';
+import io from 'socket.io-client';
 
 import { Categories } from '../../data'
 import './style.css'
+
+
+
+const socket = io('http://localhost:5001');
 
 const CssTextField = styled(TextField)({
   '& label.Mui-focused': {
@@ -42,6 +47,11 @@ const Settings = () => {
   const [category, setCat] = useState('')
   const [difficulty, setDiff] = useState('')
   const [type, setType] = useState('')
+  const [roomName, setRoomName] = useState(null)
+  
+  const createRoom = () =>{
+    socket.emit('create room', {room:roomName})
+  }
 
   return (
 
@@ -108,6 +118,7 @@ const Settings = () => {
         <CssTextField
           id="roomName"
           label="Room Name"
+          onChange={(e) => setRoomName(e.target.value)}
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
@@ -120,7 +131,10 @@ const Settings = () => {
         </CssTextField>
 
         <button>Start &#8594;</button>
+        
+
       </form>
+        <button onClick={createRoom}>create room</button>
     </div>
   )
 };
