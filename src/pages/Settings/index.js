@@ -137,5 +137,5 @@ const Settings = () => {
         <button onClick={createRoom}>create room</button>
     </div>
   )
-};
+}; 
 export default Settings

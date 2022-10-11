@@ -43,7 +43,7 @@ const Room = () => {
           <button onClick={joinRoom}>Join room</button>
           <input type="text" onChange={handleChange} style={{backgroundColor:'white', color:'black'}}></input>
           <br></br>
-          <p>Players in the game:{numPlayers}</p>
+          <p>Players in the game: {numPlayers}</p>
       </div>
     </>
 
