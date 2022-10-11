@@ -130,10 +130,11 @@ const Settings = () => {
           margin="normal">
         </CssTextField>
 
-        <button onClick={createRoom}>Start &#8594;</button>
+        <button>Start &#8594;</button>
         
 
       </form>
+        <button onClick={createRoom}>create room</button>
     </div>
   )
 };
