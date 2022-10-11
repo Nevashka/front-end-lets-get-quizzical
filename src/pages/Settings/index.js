@@ -44,6 +44,7 @@ const Settings = () => {
   const [type, setType] = useState('')
 
   return (
+
     <div className='settings'>
       <h1>Questions</h1>
 
@@ -104,8 +105,21 @@ const Settings = () => {
           <MenuItem key='Combonation' value='combination'>Combination</MenuItem>
         </CssTextField>
 
-        <button>Start &#8594;</button>
+        <CssTextField
+          id="roomName"
+          label="Room Name"
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                {/* <AccountCircle /> */}
+              </InputAdornment>
+            ),
+          }}
+          variant="standard"
+          margin="normal">
+        </CssTextField>
 
+        <button>Start &#8594;</button>
       </form>
     </div>
   )
