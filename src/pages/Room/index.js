@@ -19,8 +19,15 @@ const Room = () => {
   const [players, setPlayers] = useState(['tony'])
   
   useEffect(() => {
-    socket.on('join error', msg => console.log(msg))
-
+    socket.on('join error', (msg) => {
+      console.log(msg)
+      sethidden(false)
+    })
+    socket.on('room full error', (msg) => {
+      console.log(msg)
+      sethidden(false)
+    })
+    
     socket.on('room size', data => {
       console.log(data)
       setNumPlayers(data)
