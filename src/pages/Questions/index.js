@@ -12,6 +12,7 @@ const Questions = () => {
 
 
   console.log('in questions', category, difficulty, type)
+  
 
   // const params = [category, difficulty, type]
   // const questions = fetchQuestions({category: category}, {difficulty: difficulty}, {type: type})
