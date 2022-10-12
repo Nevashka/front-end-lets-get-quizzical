@@ -6,7 +6,7 @@ const settingsReducer = (state = initialState, action) => {
 
   switch(action.type) {
     case 'LOAD_QUESTIONS':
-      return { ...state, questions: action.payload, loading: true }
+      return { ...state, questions: action.payload, loading: false }
     case 'LOAD_TYPE':
       return { ...state, type: action.payload, loading: false };
     case 'LOAD_CATEGORY':
