@@ -53,12 +53,11 @@ const Settings = () => {
   const [type, setType] = useState('')
   const [roomName, setRoomName] = useState(null)
 
-
   const createRoom = () => {
     socket.emit('create room', { room: roomName })
   }
 
-  
+  console.log('in settings', {category},{difficulty},{type})
   const dispatch = useDispatch()
 
   const handleFormSubmit = (e) => {
@@ -67,7 +66,6 @@ const Settings = () => {
     dispatch(loadCategory(category));
     dispatch(loadDifficulty(difficulty));
     dispatch(loadType(type))
-    // passParams(category, difficulty, type)
   }
 
 
@@ -148,7 +146,6 @@ const Settings = () => {
           variant="standard"
           margin="normal">
         </CssTextField>
-
         <Link to='/Room'><button onClick={createRoom} >Create A Room &#8594;</button></Link>
 
       </form>
