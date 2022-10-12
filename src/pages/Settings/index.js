@@ -55,6 +55,7 @@ const Settings = () => {
 
   const createRoom = () => {
     socket.emit('create room', { room: roomName })
+    console.log('creating room')
   }
 
   console.log('in settings', {category},{difficulty},{type})
@@ -166,7 +167,7 @@ const Settings = () => {
           <MenuItem key='Hard' value='hard'>Hard</MenuItem>
         </CssTextField>
 
-        <CssTextField
+        {/* <CssTextField
           id="qtype"
           select
           label="Select a type"
@@ -174,10 +175,11 @@ const Settings = () => {
           value={type}
           onChange={handleType}
         >
-          <MenuItem key='Multiple Choice' value='multipleChoice'>Muiltple Choice</MenuItem>
-          <MenuItem key='TrueFalse' value='trueFalse'>True/False</MenuItem>
-          <MenuItem key='Combonation' value='combination'>Combination</MenuItem>
+          <MenuItem key='Multiple' value='multiple'>Multiple Choice</MenuItem>
+          <MenuItem key='TrueFalse' value='boolean'>True/False</MenuItem>
+          <MenuItem key='Combonation' value=''>Combination</MenuItem>
         </CssTextField>
+         */}
 
         <CssTextField
           id="roomName"
