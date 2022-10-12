@@ -18,7 +18,7 @@ function App() {
               <Route path='/Leaderboard' element={<Leaderboard/>}/>
           </Routes>  
         </main>
-            <Socket />
+            
       </div>
     </>
   );
