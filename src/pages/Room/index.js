@@ -3,6 +3,8 @@
 //create a user socket in the server and in the client
 import { React, useState, useEffect } from 'react';
 import io from 'socket.io-client';
+import { Link } from 'react-router-dom'
+
 
 const socket = io('http://localhost:5001/Room');
 
@@ -32,7 +34,8 @@ const Room = () => {
     <>
       <div>Room</div>
       <div id="join button">
-        <button onClick={joinRoom}>Join room</button>
+      <Link to='/Questions'><button onClick={joinRoom}>Join room</button></Link>
+        
         <input type="text" onChange={handleChange} style={{ backgroundColor: 'white', color: 'black' }}></input>
         <br></br>
         <p>Players in the game:{numPlayers}</p>
