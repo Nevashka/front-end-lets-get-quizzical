@@ -26,7 +26,10 @@ const Room = () => {
     } )
 
     socket.on('add player', data => {
-      setPlayers([...players, data])
+
+      console.log('updating players')
+      setPlayers(data)
+
     })
   }, []);
 
