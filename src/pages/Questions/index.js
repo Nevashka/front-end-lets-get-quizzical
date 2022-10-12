@@ -12,32 +12,35 @@ const Questions = () => {
 
 
   console.log('in questions', category, difficulty, type)
-  
+  const url = `https://opentdb.com/api.php?amount=10&category=${category}&difficulty=${difficulty}`
 
+  console.log('in questions', url)
   // const params = [category, difficulty, type]
   // const questions = fetchQuestions({category: category}, {difficulty: difficulty}, {type: type})
   // console.log('questions', questions)
 
   useEffect(() => {
-    const fetchQuestions = async (category, difficulty, type) => {
-      console.log('inside function', category, difficulty, type)
 
-      const url = `https://opentdb.com/api.php?amount=10&category=${category}&difficulty=${difficulty}&type=${type}`
+    const fetchQuestions = async (path) => {
+      
+      console.log('inside function', path)
+
+      
       try {
-        const { data } = await axios.get(url)
+        const { data } = await axios.get(path)
         console.log('api data:', data)
-        return data.results
+        return data
       } catch (err) {
         throw new Error(err.message)
       }
 
     }
     
-    fetchQuestions(category, difficulty, type)
+    fetchQuestions(url)
 
   }, [])
 
-
+  
 
   return (
     <>
