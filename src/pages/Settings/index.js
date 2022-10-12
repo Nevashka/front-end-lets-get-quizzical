@@ -4,12 +4,14 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import InputAdornment from '@mui/material/InputAdornment';
 import { styled } from '@mui/material/styles'
 import MenuItem from '@mui/material/MenuItem';
+// import { Link } from '@mui/material';
+import { useDispatch } from 'react-redux'
+import { Link } from 'react-router-dom'
+
 import io from 'socket.io-client';
-
 import { Categories } from '../../data'
+import { loadCategory, loadDifficulty, loadType } from '../../actions'
 import './style.css'
-
-
 
 const socket = io('http://localhost:5001');
 
@@ -42,23 +44,41 @@ const CssTextField = styled(TextField)({
     },
   },
 });
+
 const Settings = () => {
   const [username, setUsername] = useState('')
   const [category, setCat] = useState('')
   const [difficulty, setDiff] = useState('')
   const [type, setType] = useState('')
   const [roomName, setRoomName] = useState(null)
-  
-  const createRoom = () =>{
-    socket.emit('create room', {room:roomName})
+
+  const createRoom = () => {
+    socket.emit('create room', { room: roomName })
   }
+
+  
+  const dispatch = useDispatch()
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault()
+    console.log('i am submitted')
+    dispatch(loadCategory(category));
+    dispatch(loadDifficulty(difficulty));
+    dispatch(loadType(type))
+    // passParams(category, difficulty, type)
+  }
+
+
+
+
+
 
   return (
 
     <div className='settings'>
       <h1>Questions</h1>
 
-      <form>
+      <form onSubmit={handleFormSubmit}>
         <CssTextField
           id="username"
           label="Username"
@@ -130,11 +150,9 @@ const Settings = () => {
           margin="normal">
         </CssTextField>
 
-        <button>Start &#8594;</button>
-        
+        <Link to='/Room'><button onClick={createRoom} >Create A Room &#8594;</button></Link>
 
       </form>
-        <button onClick={createRoom}>create room</button>
     </div>
   )
 };

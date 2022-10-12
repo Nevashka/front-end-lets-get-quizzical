@@ -1,32 +1,19 @@
-import React from 'react'
-import axios from 'axios';
+import  { useEffect } from 'react';
+import { useSelector } from 'react-redux'
+import { fetchQuestions } from '../../actions';
+
 
 
 const Questions = () => {
-    const fetchQuestions = async (category,difficulty,type) => {
-        try {
-            const { data } = await axios.get(`https://opentdb.com/api.php?amount=10&category=${category}&difficulty=${difficulty}&type=${type}`)
-            return data
-        } catch (err) {
-            throw new Error(err.message)
-        }
-            
-    }
+    const category = useSelector(state => state.category)
+    const difficulty = useSelector(state => state.difficulty)
+    const type = useSelector(state => state.type)
+
+  useEffect ( () => {
+    fetchQuestions(category,difficulty,type)
+  })
     
 };
 
 export default Questions
 
-
-// const Questions = () => {
-//     const fetchQuestions = async (category,difficulty,type) => {
-//         try {
-//             const { data } = await axios.get(`https://opentdb.com/api.php?amount=10&category=${category}&difficulty=${difficulty}&type=${type}`)
-//             return data
-//         } catch (err) {
-//             throw new Error(err.message)
-//         }
-            
-//     }
-    
-// };
