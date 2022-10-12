@@ -13,6 +13,16 @@ const Questions = () => {
     fetchQuestions(category,difficulty,type)
   })
     
+  return (
+    <>
+    <h2>category: {category} difficulty: {difficulty}</h2> 
+    <h1></h1>
+    <button></button>
+    <button></button>
+    <button></button>
+    <button></button>
+    </>
+  )
 };
 
 export default Questions
