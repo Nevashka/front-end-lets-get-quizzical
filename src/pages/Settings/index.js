@@ -5,13 +5,7 @@ import InputAdornment from '@mui/material/InputAdornment';
 import { styled } from '@mui/material/styles'
 import MenuItem from '@mui/material/MenuItem';
 
-<<<<<<< HEAD
-
-import io from 'socket.io-client';
-
-=======
 import io from 'socket.io-client'
->>>>>>> f410b37253da8b528a5a35f689eae03dfb71a92f
 // import { Link } from '@mui/material';
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
