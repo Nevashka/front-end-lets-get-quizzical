@@ -1,10 +1,14 @@
-const initialState = { category: '', difficulty: '', type: '', loading: false}
+const initialState = { category: '', difficulty: '', type: '', questions: [], loading: false}
+
+//store params in a single object and pass then to a reducer object called PARAMS(?)
 
 const settingsReducer = (state = initialState, action) => {
 
   switch(action.type) {
-    case 'LOADING':
-      return { ...state, type: action.payload, loading: true };
+    case 'LOAD_QUESTIONS':
+      return { ...state, questions: action.payload, loading: true }
+    case 'LOAD_TYPE':
+      return { ...state, type: action.payload, loading: false };
     case 'LOAD_CATEGORY':
       return { ...state, category: action.payload, loading: false };
     case 'LOAD_DIFFICULTY':
@@ -16,4 +20,5 @@ const settingsReducer = (state = initialState, action) => {
   }
 }
 
+// add LOAD_QUESTIONS reducer?
 export default settingsReducer;
