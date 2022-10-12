@@ -5,6 +5,7 @@ import InputAdornment from '@mui/material/InputAdornment';
 import { styled } from '@mui/material/styles'
 import MenuItem from '@mui/material/MenuItem';
 import io from 'socket.io-client';
+import { Link } from 'react-router-dom'
 
 import { Categories } from '../../data'
 import './style.css'
@@ -134,7 +135,10 @@ const Settings = () => {
         
 
       </form>
+      <Link to='/Room'>
         <button onClick={createRoom}>create room</button>
+
+      </Link>
     </div>
   )
 }; 
