@@ -8,6 +8,7 @@ import io from 'socket.io-client';
 
 import { Categories } from '../../data'
 import './style.css'
+import { Link } from '@mui/material';
 
 
 
@@ -130,11 +131,10 @@ const Settings = () => {
           margin="normal">
         </CssTextField>
 
-        <button>Start &#8594;</button>
+        <Link to='/Room'><button onClick={createRoom}>Create &#8594;</button></Link>
         
 
       </form>
-        <button onClick={createRoom}>create room</button>
     </div>
   )
 };
