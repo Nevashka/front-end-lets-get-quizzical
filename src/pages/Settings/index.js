@@ -4,8 +4,12 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import InputAdornment from '@mui/material/InputAdornment';
 import { styled } from '@mui/material/styles'
 import MenuItem from '@mui/material/MenuItem';
+
+import io from 'socket.io-client';
+
 // import { Link } from '@mui/material';
 import { useDispatch } from 'react-redux'
+
 import { Link } from 'react-router-dom'
 
 import io from 'socket.io-client';
@@ -52,6 +56,7 @@ const Settings = () => {
   const [type, setType] = useState('')
   const [roomName, setRoomName] = useState(null)
 
+
   const createRoom = () => {
     socket.emit('create room', { room: roomName })
   }
@@ -67,9 +72,6 @@ const Settings = () => {
     dispatch(loadType(type))
     // passParams(category, difficulty, type)
   }
-
-
-
 
 
 
@@ -153,7 +155,8 @@ const Settings = () => {
         <Link to='/Room'><button onClick={createRoom} >Create A Room &#8594;</button></Link>
 
       </form>
+     
     </div>
   )
-};
+}; 
 export default Settings
