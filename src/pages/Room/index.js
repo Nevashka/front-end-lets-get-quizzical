@@ -16,7 +16,7 @@ const Room = () => {
   const [roomName, setRoomName] = useState(null);
   const [numPlayers, setNumPlayers] = useState(0)
   const [username, setUsername] = useState(null)
-  const [players, setPlayers] = useState(['tony'])
+  const [players, setPlayers] = useState([''])
   
   useEffect(() => {
     socket.on('join error', (msg) => {

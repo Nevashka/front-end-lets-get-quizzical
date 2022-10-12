@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom'
 
 
 import { Categories } from '../../data'
-import { loadCategory, loadDifficulty, loadType } from '../../actions'
+import { sendData } from '../../actions'
 import './style.css'
 
 const socket = io('http://localhost:5001');
@@ -58,24 +58,71 @@ const Settings = () => {
   }
 
   console.log('in settings', {category},{difficulty},{type})
+
   const dispatch = useDispatch()
 
-  const handleFormSubmit = (e) => {
-    e.preventDefault()
-    console.log('i am submitted')
-    dispatch(loadCategory(category));
-    dispatch(loadDifficulty(difficulty));
-    dispatch(loadType(type))
+//  const handleFormSubmit = (e) => {
+//   e.preventDefault()
+
+  
+//     dispatch({
+//       type: 'LOAD_CATEGORY',
+//       payload: {category}
+//     })
+  
+  
+//     dispatch({
+//       type: 'LOAD_DIFFICULTY',
+//       payload: {difficulty}
+//     })
+  
+  
+//     dispatch({
+//       type: 'LOAD_TYPE',
+//       payload:{ type}
+//     })
+//   }
+
+  // const handleCategory = e => {
+  //   setCat(e.target.value)
+  // }
+  // const handleDifficulty= e => {
+  //   setDiff(e.target.value)
+  // }
+  // const handleType= e => {
+  //   setType(e.target.value)
+  // }
+  
+  const handleCategory= event => {
+    setCat(event.target.value)
+    dispatch({
+      type: 'LOAD_CATEGORY',
+      payload: event.target.value
+    })
+    
   }
-
-
+  
+  const handleDifficulty = event => {
+    setDiff(event.target.value)
+    dispatch({
+      type: 'LOAD_DIFFICULTY',
+      payload: event.target.value
+    })
+  }
+  const handleType = event => {
+    setType(event.target.value)
+    dispatch({
+      type: 'LOAD_TYPE',
+      payload: event.target.value
+    })
+  }
 
   return (
 
     <div className='settings'>
       <h1>Questions</h1>
 
-      <form onSubmit={handleFormSubmit}>
+      <form >
         {/* <CssTextField
           id="username"
           label="Username"
@@ -97,7 +144,7 @@ const Settings = () => {
           label="Select a category"
           margin="normal"
           value={category}
-          onChange={(e) => setCat(e.target.value)}
+          onChange={handleCategory}
         >
           {Categories.map((cat) => (
             <MenuItem key={cat.category} value={cat.value}>
@@ -112,7 +159,7 @@ const Settings = () => {
           label="Select a difficulty"
           margin="normal"
           value={difficulty}
-          onChange={(e) => setDiff(e.target.value)}
+          onChange={handleDifficulty}
         >
           <MenuItem id='easy' key='Easy' value='easy'>Easy</MenuItem>
           <MenuItem key='Medium' value='medium'>Medium</MenuItem>
@@ -125,7 +172,7 @@ const Settings = () => {
           label="Select a type"
           margin="normal"
           value={type}
-          onChange={(e) => setType(e.target.value)}
+          onChange={handleType}
         >
           <MenuItem key='Multiple Choice' value='multipleChoice'>Muiltple Choice</MenuItem>
           <MenuItem key='TrueFalse' value='trueFalse'>True/False</MenuItem>
