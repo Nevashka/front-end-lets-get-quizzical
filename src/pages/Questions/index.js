@@ -1,50 +1,36 @@
 import { useEffect } from 'react';
-import { useSelector } from 'react-redux'
+import { useSelector,useDispatch } from 'react-redux'
 import { fetchQuestions } from '../../actions';
-import axios from 'axios';
-
-
 
 const Questions = () => {
   const category = useSelector(state => state.category)
   const difficulty = useSelector(state => state.difficulty)
-  const type = useSelector(state => state.type)
+  const questions = useSelector(state => state.type)
+  const questionidx = useSelector(state =>state.qidx)
 
-
-  console.log('in questions', category, difficulty, type)
   const url = `https://opentdb.com/api.php?amount=10&category=${category}&difficulty=${difficulty}`
 
-  console.log('in questions', url)
-  // const params = [category, difficulty, type]
-  // const questions = fetchQuestions({category: category}, {difficulty: difficulty}, {type: type})
-  // console.log('questions', questions)
-
-  useEffect(() => {
-
-    const fetchQuestions = async (path) => {
-      
-      console.log('inside function', path)
-
-      
-      try {
-        const { data } = await axios.get(path)
-        console.log('api data:', data)
-        return data
-      } catch (err) {
-        throw new Error(err.message)
-      }
-
-    }
+  const dispatch = useDispatch()
+  const setQuestions = q => {
+    dispatch ({
+      type:'SET_QUESTIONS',
+      payload:q
+    })
     
-    fetchQuestions(url)
+  }
+  
+  useEffect(() => {
+    const results = fetchQuestions(url)
+    console.log('results',results)
+    setQuestions(results)
 
   }, [])
 
-  
 
   return (
     <>
-      <h3>questions appear here!</h3>
+      <h2>question {questionidx + 1} </h2>
+      
 
     </>
   )

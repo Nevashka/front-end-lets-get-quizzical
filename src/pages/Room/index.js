@@ -55,7 +55,7 @@ const Room = () => {
 
   const startGame = () => {
     console.log('starting the game')
-    
+  
   }
   
   return (
@@ -66,7 +66,7 @@ const Room = () => {
         
         <label hidden={hidden} > Username:</label>
         <input id="username" type="text" hidden={hidden} onChange={handleChangeName} style={{ backgroundColor: 'white', color: 'black' }}></input>
-        <label>Room Name:</label>
+        <label >Room: {roomName} </label>
         <input id="roomname" type="text" hidden={hidden} onChange={handleChangeRoom} style={{ backgroundColor: 'white', color: 'black' }}></input>
         <button id="join" onClick={joinRoom} hidden={hidden}>Join Room</button>
         
@@ -76,9 +76,9 @@ const Room = () => {
       </div>
 
       <div id="players">
-        <p>Players in the game: {numPlayers}</p>
-        <p> Players in game:</p>
-        <ul>
+        <p >Total players waiting: {numPlayers}</p>
+        <p hidden={hidden}> Players in game:</p>
+        <ul hidden={hidden}>
           {
             players.map((player, i) => {
               return <li key={i}>{player}</li>

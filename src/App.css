@@ -13,4 +13,9 @@
 
 html {
     background-color: var(--bgBlue);
+    /* background-image: url('./background.png'); */
+}
+
+#app {
+    /* background-image: url('./background.png'); */
 }
