@@ -9,10 +9,9 @@ import io from 'socket.io-client';
 
 // import { Link } from '@mui/material';
 import { useDispatch } from 'react-redux'
-
 import { Link } from 'react-router-dom'
 
-import io from 'socket.io-client';
+
 import { Categories } from '../../data'
 import { loadCategory, loadDifficulty, loadType } from '../../actions'
 import './style.css'
@@ -50,7 +49,6 @@ const CssTextField = styled(TextField)({
 });
 
 const Settings = () => {
-  const [username, setUsername] = useState('')
   const [category, setCat] = useState('')
   const [difficulty, setDiff] = useState('')
   const [type, setType] = useState('')
@@ -81,7 +79,7 @@ const Settings = () => {
       <h1>Questions</h1>
 
       <form onSubmit={handleFormSubmit}>
-        <CssTextField
+        {/* <CssTextField
           id="username"
           label="Username"
           margin="normal"
@@ -94,7 +92,7 @@ const Settings = () => {
           }}
           variant="standard"
           onChange={(e) => setUsername(e.target.value)}
-        />
+        /> */}
 
         <CssTextField
           id="categories"
