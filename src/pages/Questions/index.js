@@ -8,19 +8,18 @@ const Questions = () => {
     const category = useSelector(state => state.category)
     const difficulty = useSelector(state => state.difficulty)
     const type = useSelector(state => state.type)
+   
+    console.log('in questoins',{category},{difficulty},{type})
 
   useEffect ( () => {
-    fetchQuestions(category,difficulty,type)
+    const questions = fetchQuestions(category,difficulty,type)
+    console.log('questions', {questions})
   })
     
+  
   return (
     <>
-    <h2>category: {category} difficulty: {difficulty}</h2> 
-    <h1></h1>
-    <button></button>
-    <button></button>
-    <button></button>
-    <button></button>
+    <h3>questions appear here!</h3>
     </>
   )
 };
