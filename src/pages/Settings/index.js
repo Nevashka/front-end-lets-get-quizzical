@@ -1,20 +1,16 @@
 import React, { useState } from 'react'
+import io from 'socket.io-client'
+import { useDispatch } from 'react-redux'
+import { Link } from 'react-router-dom'
 import TextField from '@mui/material/TextField';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import InputAdornment from '@mui/material/InputAdornment';
 import { styled } from '@mui/material/styles'
 import MenuItem from '@mui/material/MenuItem';
-
-
-import io from 'socket.io-client'
 // import { Link } from '@mui/material';
-import { useDispatch } from 'react-redux'
-import { Link } from 'react-router-dom'
-
-
 import { Categories } from '../../data'
-import { sendData } from '../../actions'
 import './style.css'
+import { BackButton } from '../../components';
 
 const socket = io('http://localhost:5001');
 
@@ -51,7 +47,6 @@ const CssTextField = styled(TextField)({
 const Settings = () => {
   const [category, setCat] = useState('')
   const [difficulty, setDiff] = useState('')
-  const [type, setType] = useState('')
   const [roomName, setRoomName] = useState(null)
 
   const createRoom = () => {
@@ -59,24 +54,16 @@ const Settings = () => {
     console.log('creating room')
   }
 
-  console.log('in settings', { category }, { difficulty }, { type })
+  console.log('in settings', { category }, { difficulty })
 
   const dispatch = useDispatch()
 
   const handleCategory = event => {
     setCat(event.target.value)
-    // dispatch({
-    //   type: 'LOAD_CATEGORY',
-    //   payload: event.target.value
-    // })
   }
 
   const handleDifficulty = event => {
     setDiff(event.target.value)
-    // dispatch({
-    //   type: 'LOAD_DIFFICULTY',
-    //   payload: event.target.value
-    // })
   }
 
   const setQuestions = (results) => {
@@ -104,7 +91,8 @@ const Settings = () => {
   }
 
   return (
-
+    
+    <>
     <div className='settings'>
       <h1>Questions</h1>
 
@@ -142,13 +130,6 @@ const Settings = () => {
           id="roomName"
           label="Room Name"
           onChange={(e) => setRoomName(e.target.value)}
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                {/* <AccountCircle /> */}
-              </InputAdornment>
-            ),
-          }}
           variant="standard"
           margin="normal">
         </CssTextField>
@@ -157,6 +138,9 @@ const Settings = () => {
       </form>
 
     </div>
+    <BackButton/>
+  
+   </>
   )
 };
 export default Settings

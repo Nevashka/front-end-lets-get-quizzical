@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux'
 import { fetchQuestions } from '../../actions';
+import { decode } from "html-entities";
+
+
 import io from 'socket.io-client';
 
 const socket = io('http://localhost:5001');
@@ -47,8 +50,10 @@ const Questions = () => {
  
   return (
     <>
+
       {/* <h2>question {questionidx + 1} </h2>
       <h3>{questions[questionidx].question}</h3> */}
+
       <ul>
         <li hidden={!renderQuestion[0]}>Question 1</li>
         <li hidden={!renderQuestion[1]}>Question 2</li>

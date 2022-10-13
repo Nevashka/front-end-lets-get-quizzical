@@ -4,8 +4,8 @@
 import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
 import { Link, Outlet, Navigate, useNavigate } from 'react-router-dom'
-import { fetchQuestions } from '../../actions';
-import { useSelector, useDispatch } from 'react-redux'
+import { BackButton } from '../../components';
+  
 
 import { Questions } from '../../pages'
 import './style.css'
@@ -84,7 +84,7 @@ const Room = () => {
     setVisible((prev) => !prev)
   }
 
-  function onClinckFunctions () {
+  function onClickFunctions () {
     removeElement();
     startGame()
     handleQuestions()
@@ -101,14 +101,14 @@ const Room = () => {
         <label >Room: {roomName} </label>
         <input id="roomname" type="text" hidden={hidden} onChange={handleChangeRoom} style={{ backgroundColor: 'white', color: 'black' }}></input>
         <button id="join" onClick={joinRoom} hidden={hidden}>Join Room</button>
-        {visible && <Link to='Questions'><button id='play' hidden={!hidden} onClick={onClinckFunctions}>Start Game</button></Link>}
+        {visible && <Link to='Questions'><button id='play' hidden={!hidden} onClick={onClickFunctions}>Start Game</button></Link>}
         
 
         <Outlet />
       </div>
 
       <div id="players">
-        <p >Total players waiting: {numPlayers}</p>
+        {visible && <p>Total players waiting: {numPlayers}</p>}
         <p hidden={hidden}> Players in game:</p>
         <ul hidden={hidden}>
           {
@@ -118,7 +118,7 @@ const Room = () => {
           }
         </ul>
       </div>
-
+      {visible && <BackButton hidden={hidden}/>}
     </>
   )
 }
