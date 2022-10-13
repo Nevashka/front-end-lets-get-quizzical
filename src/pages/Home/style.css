@@ -4,16 +4,16 @@
   margin: 20vh;
   align-items: center;
   justify-content: center;
-  border: 2px solid purple;
-  padding: 30px;
+  padding: 70px;
+  backdrop-filter: blur(2px)
 
 }
 #card {
-  margin: 5vh;
+  margin: 10vh;
   /* border: 2px solid green; */
   text-align: center;
 }
-#buttons {
+#homeBtns {
   /* border: 2px solid red; */
   display: flex;
   flex-direction: row;
@@ -21,7 +21,6 @@
   align-items: center;
   align-content: space-around;
   justify-content: space-around;
-  
   margin-top: 10px;
   
 }
