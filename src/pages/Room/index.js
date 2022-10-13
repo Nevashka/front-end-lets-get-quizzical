@@ -2,6 +2,7 @@
 //Game is called here?
 //create a user socket in the server and in the client
 import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux'
 import io from 'socket.io-client';
 import { Link, Outlet, Navigate, useNavigate } from 'react-router-dom'
 import { BackButton } from '../../components';
@@ -97,6 +98,8 @@ const Room = () => {
     removeElement();
     startGame()
     handleQuestions()
+
+
   }
 
   return (
