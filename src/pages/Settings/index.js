@@ -65,18 +65,18 @@ const Settings = () => {
 
   const handleCategory = event => {
     setCat(event.target.value)
-    dispatch({
-      type: 'LOAD_CATEGORY',
-      payload: event.target.value
-    })
+    // dispatch({
+    //   type: 'LOAD_CATEGORY',
+    //   payload: event.target.value
+    // })
   }
 
   const handleDifficulty = event => {
     setDiff(event.target.value)
-    dispatch({
-      type: 'LOAD_DIFFICULTY',
-      payload: event.target.value
-    })
+    // dispatch({
+    //   type: 'LOAD_DIFFICULTY',
+    //   payload: event.target.value
+    // })
   }
 
   const setQuestions = (results) => {
