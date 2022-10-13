@@ -1,5 +1,5 @@
 
-import { Router, Route, Link, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import { Settings, Home, Room, Leaderboard } from './pages'
 
 import './App.css'
@@ -13,7 +13,7 @@ function App() {
           <Routes>
               <Route path='/' element={<Home />}/>
               <Route path='/Settings' element={<Settings />}/>
-              <Route path='/Room' element={<Room />}></Route>
+              <Route path='/Room' element={<Room />}/>
               <Route path='/Leaderboard' element={<Leaderboard />}/>
           </Routes>  
         </main>

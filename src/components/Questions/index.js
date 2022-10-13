@@ -54,20 +54,7 @@ const Questions = () => {
       setAnswers(options.sort(() => Math.random() - 0.5))
     };
 
-  if(Questions.length >1){
-    console.log('getting answers')
-    
-      console.log('function one')
-      let options = []
-      let incorrect = decode(Questions[numQ-1].incorrect_answers)
-      let correct = decode(Questions[numQ-1].correct_answer)
-      console.log(options)
-      incorrect.map(ans => options.push(ans))
-      options.push(correct)
-      
-      setAnswers(options.sort(() => Math.random() - 0.5))
-    
-  }
+ 
   console.log(answers)
 
 

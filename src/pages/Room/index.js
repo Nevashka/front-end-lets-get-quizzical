@@ -1,12 +1,10 @@
-//socket between room and server?
-//Game is called here?
-//create a user socket in the server and in the client
+
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux'
 import io from 'socket.io-client';
-import { Link, Outlet, Navigate, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { BackButton } from '../../components';
-import { useSelector } from 'react-redux'
+
 
   
 
@@ -23,7 +21,6 @@ const Room = () => {
   const [numPlayers, setNumPlayers] = useState(0)
   const [username, setUsername] = useState(null)
   const [players, setPlayers] = useState([''])
-  const [redirect, setRedirect] = useState(false)
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {
@@ -49,7 +46,7 @@ const Room = () => {
     })
     socket.on('Begin', data => {
       console.log('lets begin innit')
-      setRedirect(data)
+      
     })
 
     socket.on('hide for all', (data) => {
@@ -62,14 +59,7 @@ const Room = () => {
     socket.emit('share questions', questions)
     
   }
-  const navigate = useNavigate()
-  useEffect(() => {
-    console.log('updating redirect')
-    if(redirect){
-      navigate('/Room/Questions')
-      
-    }
-  }, [redirect])
+  
 
   const handleChangeRoom = (e) => {
     setRoomName(e.target.value)
@@ -117,7 +107,7 @@ const Room = () => {
         {visible && <Link to='Questions'><button id='play' hidden={!hidden} onClick={onClickFunctions}>Start Game</button></Link>}
         
 
-        <Outlet />
+        
       </div>
 
       <div id="players">
