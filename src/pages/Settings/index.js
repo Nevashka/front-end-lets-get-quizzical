@@ -136,7 +136,7 @@ const Settings = () => {
           variant="standard"
           margin="normal">
         </CssTextField>
-        <Link to='/Room'><button onClick={onClickFunctions} >Create A Room &#8594;</button></Link>
+        <button onClick={onClickFunctions} ><Link to='/Room'>Create A Room &#8594;</Link></button>
 
       </form>
 
