@@ -51,8 +51,7 @@ const Settings = () => {
   const [roomName, setRoomName] = useState(null)
 
   const createRoom = () => {
-    socket.emit('create room', { room: roomName })
-    console.log('creating room')
+    
   }
 
   console.log('in settings', { category }, { difficulty })
@@ -85,12 +84,15 @@ const Settings = () => {
       console.log('in room', data.results)
       data.results.length > 1 ? setLoading(false) : setLoading(true)
       
+      
     })
   }
 
   function onClickFunctions() {
     fetchQuestions();
-    loading ? console.log('i am loading the questions, wait pls'): createRoom() 
+    // loading ? console.log('i am loading the questions, wait pls'): createRoom() 
+    socket.emit('create room', { room: roomName })
+    console.log('creating room')
   }
 
   return (

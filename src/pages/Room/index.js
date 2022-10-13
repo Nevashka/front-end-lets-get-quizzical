@@ -2,9 +2,11 @@
 //Game is called here?
 //create a user socket in the server and in the client
 import React, { useState, useEffect } from 'react';
+import { render } from 'react-dom';
 import { useSelector } from 'react-redux'
 import io from 'socket.io-client';
 import { BackButton, Questions } from '../../components';
+import { Card, Avatar, Container, ThemeProvider, Box, Typography, flexbox } from '@mui/material'
 
 import './style.css'
 
@@ -76,22 +78,23 @@ const Room = () => {
   const removeElement = () => {
     setVisible((prev) => !prev)
   }
+  
+  const getQuestions = () =>  {
+    render (<Questions/>)
+  } 
 
   function onClickFunctions() {
-    
     removeElement();
     startGame()
     handleQuestions()
-    
-
-
   }
 
+  
   return (
-    <>
+   
       <div id='room'  >
-
-        <div id="join-button">
+      
+        {visible && <div id="join-button">
 
           <label hidden={hidden} > Username:</label>
           <input id="username" type="text" hidden={hidden} onChange={handleChangeName} style={{ backgroundColor: 'white', color: 'black' }}></input>
@@ -100,11 +103,11 @@ const Room = () => {
           <button id="join" onClick={joinRoom} hidden={hidden}>Join Room</button>
           <button id='play' hidden={!hidden} onClick={onClickFunctions}>Start Game</button>
 
+        </div>}
+        
 
-        </div>
-
-        <div id="players">
-          {visible && <p>Total players waiting: {numPlayers}</p>}
+          {visible && <div id="players">
+          <p>Total players waiting: {numPlayers}</p>
           <p hidden={hidden}> Players in game:</p>
           <ul hidden={hidden}>
             {
@@ -113,15 +116,17 @@ const Room = () => {
               })
             }
           </ul>
-        </div>
-        {visible && <BackButton hidden={hidden} />}
+          </div>}
 
-      </div>
-
-      <div id='questions' >
-        <Questions />
-      </div>
-    </>
+        <BackButton hidden={hidden} />
+        
+      
+      
+       {!visible && <div id='questions' >
+        <Questions/>
+       </div>}
+     
+   </div>
   )
 }
 

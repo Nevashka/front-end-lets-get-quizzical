@@ -21,8 +21,10 @@ const Questions = () => {
 
     socket.on('load question', index => {
       setRenderQuestion((prev) => {
-        prev[index] = !prev[index]
+        prev[index] = true
+    
         return[...prev]
+
       })
       getAnswers(index)
       setIndex(`Question: ${index + 1}`)
@@ -53,18 +55,13 @@ const Questions = () => {
       setAnswers(options.sort(() => Math.random() - 0.5))
     };
 
-
-
-
-
-
+    console.log('in questions', questions)
 
     return (
       <div>
         <h2> {index} </h2>
-        <h3>{index}</h3>
 
-        {/* <ul>
+        <ul>
           <li hidden={!renderQuestion[0]}>{decode(questions[0].question)}</li>
           <li hidden={!renderQuestion[1]}>{decode(questions[1].question)}</li>
           <li hidden={!renderQuestion[2]}>{decode(questions[2].question)}</li>
@@ -83,7 +80,7 @@ const Questions = () => {
             })
           }
         </div>
-        </ul> */}
+        </ul>
       </div>
 
 
