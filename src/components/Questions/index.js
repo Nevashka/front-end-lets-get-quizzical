@@ -9,75 +9,50 @@ const socket = io('http://localhost:5001');
 
 const Questions = () => {
   const [answers, setAnswers] = useState([])
-  // const questions = useSelector(state => state.questions)
-  // const questionidx = useSelector(state => state.qidx)
+  const [index, setIndex] = useState('loading questions...')
+  const [Questions, setQuestions] = useState([])
+  const questions = useSelector(state => state.questions)
+  const questionidx = useSelector(state => state.qidx)
 
- 
-  // const questions = useSelector(state => state.questions)
-  // const questionidx = useSelector(state =>state.qidx)
-  // const questions = fetchQuestions({category: category}, {difficulty: difficulty}, {type: type})
-  // console.log('questions', questions)
-  const [numQ, setnumQ] = useState(1)
-  const[Questions, setQuestions] = useState([])
-  // console.log(questionidx)
-  console.log('this is Questions',Questions)
-  // console.log('this is questions',questions)
-  console.log('this is answers',answers)
-
-
-  const [renderQuestion, setRenderQuestion] = useState([false,false,false,false,false,false,false,false,false,false])
-
-  
+  const [renderQuestion, setRenderQuestion] = useState([false, false, false, false, false, false, false, false, false, false])
 
   useEffect(() => {
-    console.log('loading the questions ')
-    socket.on('load question', index => {
-      console.log('sendinng question ', index)
-      setRenderQuestion((prev) => {
-              prev[index] = true
-              return[...prev]
-     })
-     setnumQ(index)
-      // setAnswers(options.sort(() => Math.random() - 0.5))
+    
 
+    socket.on('load question', index => {
+      setRenderQuestion((prev) => {
+        prev[index] = !prev[index]
+        return[...prev]
+      })
+      getAnswers(index)
+      setIndex(`Question: ${index + 1}`)
+    })
+
+    socket.emit('start', 'we done it')
+    socket.on('send questions', (data) => {
+      setQuestions(data)
+      // console.log(data)
     })
     
     
   }, [])
-  useEffect(() => {
+  
 
-    socket.emit('start', 'we done it')
-  },[])
-  // useEffect(() => {
-    useEffect(() => {
-      console.log('send questions and start')
+ 
+    const getAnswers = (index) => {
+      let options = []
+      let incorrect = decode(questions[index].incorrect_answers)
+      let correct = decode(questions[index].correct_answer)
       socket.on('send questions', (data) => {
         setQuestions(data)
-        console.log(data)
+        // console.log(data)
       })
 
-    },[Questions])
+      const incorrectOptions = incorrect.map(ans => options.push(ans))
+      const correctOptions = options.push(correct)
 
-  //   socket.on('load question', index => {
-  //     console.log('this is the index', index)
-  //     console.log('loading next question')
-  //     setRenderQuestion((prev) => {
-  //       prev[index] = true
-  //       return[...prev]
-  //     })
-  //     console.log('this is render',renderQuestion)
-  //     console.log('function 2')
-  //     let options = []
-  //     let incorrect = decode(Questions[index].incorrect_answers)
-  //     let correct = decode(Questions[index].correct_answer)
-  //     incorrect.map(ans => options.push(ans))
-  //     options.push(correct)
-      
-      
-  //     setAnswers(options.sort(() => Math.random() - 0.5))
-  //     setnumQ(index+1)
-  //   })
-  // },[])
+      setAnswers(options.sort(() => Math.random() - 0.5))
+    };
 
   if(Questions.length >1){
     console.log('getting answers')
@@ -95,23 +70,42 @@ const Questions = () => {
   }
   console.log(answers)
 
-  return (
-    <div id='ans'>
 
-      <h2>question {numQ} </h2>
-      {/* <h3>{decode(Questions[questionidx].question)}</h3> */}
 
-      {/* <div >
+
+
+
+    return (
+      <div>
+        <h2> {index} </h2>
+        {/* <h3>{decode(questions[questionidx].question)}</h3> */}
+
+        <ul>
+          <li hidden={!renderQuestion[0]}>{decode(questions[0].question)}</li>
+          <li hidden={!renderQuestion[1]}>{decode(questions[1].question)}</li>
+          <li hidden={!renderQuestion[2]}>{decode(questions[2].question)}</li>
+          <li hidden={!renderQuestion[3]}>{decode(questions[3].question)}</li>
+          <li hidden={!renderQuestion[4]}>{decode(questions[4].question)}</li>
+          <li hidden={!renderQuestion[5]}>{decode(questions[5].question)}</li>
+          <li hidden={!renderQuestion[6]}>{decode(questions[6].question)}</li>
+          <li hidden={!renderQuestion[7]}>{decode(questions[7].question)}</li>
+          <li hidden={!renderQuestion[8]}>{decode(questions[8].question)}</li>
+          <li hidden={!renderQuestion[9]}>{decode(questions[9].question)}</li>
+
+          <div >
           {
             answers.map((ans, i) => {
               return <button key={i}>{ans}</button>
             })
           }
-        </div> */}
-    </div>
+        </div>
+        </ul>
+      </div>
 
-  )
-};
 
-export default Questions
+
+    )
+  };
+
+  export default Questions
 
