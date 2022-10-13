@@ -78,7 +78,7 @@
 //       </div>
 
  
-  console.log(answers)
+  // console.log(answers)
 
 //     )
 // }

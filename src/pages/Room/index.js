@@ -9,9 +9,10 @@ import './style.css'
 
 const socket = io('http://localhost:5001');
 
+
 const Room = () => {
   const questions = useSelector(state => state.questions)
-  const [Questions, setQuestions] = useState([])
+  const [Questions, setQuestions] = useState([{question: 'question'},{question: 'question'},{question: 'question'},{question: 'question'},{question: 'question'},{question: 'question'},{question: 'question'},{question: 'question'},{question: 'question'},{question: 'question'}])
   const [hidden, sethidden] = useState(false)
   const [roomName, setRoomName] = useState(null);
   const [numPlayers, setNumPlayers] = useState(0)
@@ -19,11 +20,11 @@ const Room = () => {
   const [players, setPlayers] = useState([''])
   const [visible, setVisible] = useState(true);
   const [answers, setAnswers] = useState([])
-  const [index, setIndex] = useState('loading questions...')
+  const [questionNum, setQuestionNum] = useState('loading questions...')
   // const questionidx = useSelector(state => state.qidx)
-
+  
   const [renderQuestion, setRenderQuestion] = useState([false, false, false, false, false, false, false, false, false, false])
-
+ 
   useEffect(() => {
     socket.on('join error', (msg) => {
       console.log(msg)
@@ -43,66 +44,59 @@ const Room = () => {
 
       console.log('updating players')
       setPlayers(data)
-
+      
     })
     socket.on('Begin', data => {
       console.log('lets begin innit')
       setVisible(false)
     })
     socket.on('send questions', (data) => {
-      
+      console.log(data)
       setQuestions(data)
+
       // console.log('data',data)
       // setQuestions(questions)
       // console.log(data)
     })
     socket.on('load question', index => {
+      console.log(`loading question ${index + 1}`)
       setRenderQuestion((prev) => {
         prev[index] = !prev[index]
         return[...prev]
       })
       getAnswers(index)
       
-      setIndex(`Question: ${index + 1}`)
+      setQuestionNum(`Question: ${index + 1}`)
+      console.log(' question number',questionNum)
     })
     
-
+    
   }, []);
-
-  const getAnswers = (index) => {
-    let options = []
-    let incorrect = decode(questions[index].incorrect_answers)
-    let correct = decode(questions[index].correct_answer)
-    socket.on('send questions', (data) => {
-      // setQuestions(data)
-      // console.log(data)
-    })
-
-    const incorrectOptions = incorrect.map(ans => options.push(ans))
-    const correctOptions = options.push(correct)
-
-    setAnswers(options.sort(() => Math.random() - 0.5))
   
-}
+  
   const handleQuestions = () => {
-    socket.emit('share questions', questions)
-
+    console.log('sharing questions')
+    socket.emit('share questions', {data:questions, room:roomName})
+  }
   const getAnswers = (index) => {
+    console.log('getting answers')
+    console.log(index)
     let options = []
-    let incorrect = decode(questions[index].incorrect_answers)
-    let correct = decode(questions[index].correct_answer)
+    let incorrect = decode(Questions[index].incorrect_answers)
+    let correct = decode(Questions[index].correct_answer)
     socket.on('send questions', (data) => {
+      console.log('receiving the questions:', data)
       setQuestions(data)
       // console.log(data)
     })
-
+    
     const incorrectOptions = incorrect.map(ans => options.push(ans))
     const correctOptions = options.push(correct)
-
+    
     setAnswers(options.sort(() => Math.random() - 0.5))
   };
   
-
+  
   const handleChangeRoom = (e) => {
     setRoomName(e.target.value)
   }
@@ -114,12 +108,12 @@ const Room = () => {
     socket.emit('join room', { room: roomName, player: username })
     sethidden(!hidden) // set hidden to true
   }
-
+  
   const startGame = () => {
     console.log('starting the game')
-    socket.emit('starting the game', { room: roomName })
-    socket.emit('start', 'we done it')
-
+   
+    socket.emit('start', { room: roomName })
+    
 
   }
 
@@ -132,12 +126,13 @@ const Room = () => {
     removeElement();
     startGame()
     
-    
+    handleQuestions()
 
 
   }
   console.log('Q',Questions)
   console.log('q',questions)
+  console.log('answers',answers)
   return (
     <>
       {visible && <div id='room' >
@@ -172,19 +167,22 @@ const Room = () => {
 
       {!visible &&<div id='questions' >
       <div>
-        <h2> {index} </h2>
+        <h2> {questionNum} </h2>
 
         <ul>
-          <li hidden={!renderQuestion[0]}>{decode(questions[0].question)}</li>
-          <li hidden={!renderQuestion[1]}>{decode(questions[1].question)}</li>
-          <li hidden={!renderQuestion[2]}>{decode(questions[2].question)}</li>
-          <li hidden={!renderQuestion[3]}>{decode(questions[3].question)}</li>
-          <li hidden={!renderQuestion[4]}>{decode(questions[4].question)}</li>
-          <li hidden={!renderQuestion[5]}>{decode(questions[5].question)}</li>
-          <li hidden={!renderQuestion[6]}>{decode(questions[6].question)}</li>
-          <li hidden={!renderQuestion[7]}>{decode(questions[7].question)}</li>
-          <li hidden={!renderQuestion[8]}>{decode(questions[8].question)}</li>
-          <li hidden={!renderQuestion[9]}>{decode(questions[9].question)}</li>
+          
+
+          
+          <li hidden={!renderQuestion[0]}>{decode(Questions[0].question)}</li>
+          <li hidden={!renderQuestion[1]}>{decode(Questions[1].question)}</li>
+          <li hidden={!renderQuestion[2]}>{decode(Questions[2].question)}</li>
+          <li hidden={!renderQuestion[3]}>{decode(Questions[3].question)}</li>
+          <li hidden={!renderQuestion[4]}>{decode(Questions[4].question)}</li>
+          <li hidden={!renderQuestion[5]}>{decode(Questions[5].question)}</li>
+          <li hidden={!renderQuestion[6]}>{decode(Questions[6].question)}</li>
+          <li hidden={!renderQuestion[7]}>{decode(Questions[7].question)}</li>
+          <li hidden={!renderQuestion[8]}>{decode(Questions[8].question)}</li>
+          <li hidden={!renderQuestion[9]}>{decode(Questions[9].question)}</li>
 
           <div >
           {
@@ -203,4 +201,4 @@ const Room = () => {
   )
 }
 
-export default Room
+export default Room;
