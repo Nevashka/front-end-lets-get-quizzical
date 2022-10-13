@@ -4,23 +4,33 @@
   margin: 20vh;
   align-items: center;
   justify-content: center;
+  border: 2px solid purple;
+  padding: 30px;
 
 }
 #card {
   margin: 5vh;
+  /* border: 2px solid green; */
+  text-align: center;
 }
 #buttons {
+  /* border: 2px solid red; */
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  gap: 40px;
   align-items: center;
   align-content: space-around;
   justify-content: space-around;
   
   margin-top: 10px;
-  /* padding: 0px; */
   
 }
 
+#home {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
 /* button {
    margin: 0px;
   
