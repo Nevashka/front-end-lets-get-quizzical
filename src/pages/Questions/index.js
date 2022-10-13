@@ -25,10 +25,13 @@ const Questions = () => {
   useEffect(() => {
     
     socket.on('load question', index => {
+      console.log('this is the index', index)
+      console.log('loading next question')
       setRenderQuestion((prev) => {
-        prev[index] = !prev[index]
+        prev[index] = true
         return[...prev]
       })
+      console.log('this is render',renderQuestion)
     })
     socket.emit('start', 'we done it')
     socket.on('send questions', (data) => {
@@ -37,23 +40,22 @@ const Questions = () => {
     })
     
   }, [])
-  useEffect(() => {
-    // stop =setInterval(() => {
-    //   setSeconds(seconds => seconds + 1);
-    // }, 1000);
 
-  }, [seconds])
+
+ 
 
 
   // console.log('questions', questions)
- 
+ console.log(renderQuestion)
  
   return (
     <>
 
       {/* <h2>question {questionidx + 1} </h2>
       <h3>{questions[questionidx].question}</h3> */}
-
+  <div hidden>
+    
+  </div>
       <ul>
         <li hidden={!renderQuestion[0]}>Question 1</li>
         <li hidden={!renderQuestion[1]}>Question 2</li>
