@@ -103,7 +103,7 @@ const Settings = () => {
     
     <>
     <div className='settings'>
-      <h1>Questions</h1>
+      <h2>Question settings</h2>
 
       <form >
 
@@ -147,7 +147,8 @@ const Settings = () => {
       </form>
 
     </div>
-    <BackButton/>
+    <div className='back'> <BackButton/></div>
+    
   
    </>
   )

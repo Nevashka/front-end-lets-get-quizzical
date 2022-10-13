@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux'
 import io from 'socket.io-client';
-import { BackButton  } from '../../components';
+import { BackButton } from '../../components';
 import { decode } from "html-entities";
 
 import './style.css'
@@ -20,7 +20,10 @@ const Room = () => {
   const [players, setPlayers] = useState([''])
   const [visible, setVisible] = useState(true);
   const [answers, setAnswers] = useState([])
-  const [questionNum, setQuestionNum] = useState('loading questions...')
+
+
+  const [index, setIndex] = useState('loading questions...')
+
   // const questionidx = useSelector(state => state.qidx)
   
   const [renderQuestion, setRenderQuestion] = useState([false, false, false, false, false, false, false, false, false, false])
@@ -51,7 +54,9 @@ const Room = () => {
       setVisible(false)
     })
     socket.on('send questions', (data) => {
-      console.log(data)
+
+
+
       setQuestions(data)
 
       // console.log('data',data)
@@ -62,15 +67,15 @@ const Room = () => {
       console.log(`loading question ${index + 1}`)
       setRenderQuestion((prev) => {
         prev[index] = !prev[index]
-        return[...prev]
+        return [...prev]
       })
       getAnswers(index)
-      
-      setQuestionNum(`Question: ${index + 1}`)
-      console.log(' question number',questionNum)
+
+
+      setIndex(`Question: ${index + 1}`)
     })
-    
-    
+
+
   }, []);
   
   
@@ -94,9 +99,15 @@ const Room = () => {
     const correctOptions = options.push(correct)
     
     setAnswers(options.sort(() => Math.random() - 0.5))
-  };
-  
-  
+
+
+  }
+  const handleQuestions = () => {
+    socket.emit('share questions', questions)
+
+  }
+
+
   const handleChangeRoom = (e) => {
     setRoomName(e.target.value)
   }
@@ -122,19 +133,20 @@ const Room = () => {
   }
 
   function onClickFunctions() {
-    
+
     removeElement();
     startGame()
-    
+
     handleQuestions()
 
 
+
   }
-  console.log('Q',Questions)
-  console.log('q',questions)
-  console.log('answers',answers)
+  console.log('Q', Questions)
+  console.log('q', questions)
+
   return (
-    <>
+    <div id='Room'>
       {visible && <div id='room' >
 
         <div id="join-button">
@@ -163,41 +175,40 @@ const Room = () => {
         {visible && <BackButton hidden={hidden} />}
 
       </div>}
-      
 
-      {!visible &&<div id='questions' >
-      <div>
-        <h2> {questionNum} </h2>
 
-        <ul>
-          
 
-          
-          <li hidden={!renderQuestion[0]}>{decode(Questions[0].question)}</li>
-          <li hidden={!renderQuestion[1]}>{decode(Questions[1].question)}</li>
-          <li hidden={!renderQuestion[2]}>{decode(Questions[2].question)}</li>
-          <li hidden={!renderQuestion[3]}>{decode(Questions[3].question)}</li>
-          <li hidden={!renderQuestion[4]}>{decode(Questions[4].question)}</li>
-          <li hidden={!renderQuestion[5]}>{decode(Questions[5].question)}</li>
-          <li hidden={!renderQuestion[6]}>{decode(Questions[6].question)}</li>
-          <li hidden={!renderQuestion[7]}>{decode(Questions[7].question)}</li>
-          <li hidden={!renderQuestion[8]}>{decode(Questions[8].question)}</li>
-          <li hidden={!renderQuestion[9]}>{decode(Questions[9].question)}</li>
+      {!visible && <div id='questions' >
+        <div>
+          <h2> {index} </h2>
 
-          <div >
-          {
-            answers.map((ans, i) => {
-              return <button key={i}>{ans}</button>
-            })
-          }
+          <ul>
+            <li hidden={!renderQuestion[0]}>{decode(Questions[0].question)}</li>
+            <li hidden={!renderQuestion[1]}>{decode(Questions[1].question)}</li>
+            <li hidden={!renderQuestion[2]}>{decode(Questions[2].question)}</li>
+            <li hidden={!renderQuestion[3]}>{decode(Questions[3].question)}</li>
+            <li hidden={!renderQuestion[4]}>{decode(Questions[4].question)}</li>
+            <li hidden={!renderQuestion[5]}>{decode(Questions[5].question)}</li>
+            <li hidden={!renderQuestion[6]}>{decode(Questions[6].question)}</li>
+            <li hidden={!renderQuestion[7]}>{decode(Questions[7].question)}</li>
+            <li hidden={!renderQuestion[8]}>{decode(Questions[8].question)}</li>
+            <li hidden={!renderQuestion[9]}>{decode(Questions[9].question)}</li>
+
+            <div >
+              {
+                answers.map((ans, i) => {
+                  return <button key={i}>{ans}</button>
+                })
+              }
+            </div>
+          </ul>
+
         </div>
-        </ul>
-      </div>
-        
-           
+
+
 
       </div>}
-    </>
+    </div>
   )
 }
 

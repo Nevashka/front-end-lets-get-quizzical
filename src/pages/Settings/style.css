@@ -6,7 +6,7 @@ form {
     gap: 20px;
 }
 
-button {
+button,#setting {
     border-style: none;
     border-bottom: 1px solid white;
     width: fit-content;
@@ -28,9 +28,10 @@ button:hover {
 
 .settings {
     background-color: var(--bgBlue);
+    margin-top: 10vh;
 }
 
-ul {
+ul , #setting {
     background-color: var(--lighterBlue);
 }
 
@@ -40,4 +41,14 @@ ul {
 
 a{
     text-decoration: none;
+}
+
+h2 , #settings{
+    text-align: center;
+    margin-top: 50px;
+    padding: 30px;
+}
+
+.back {
+    margin-left: 40px;
 }
