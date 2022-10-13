@@ -1,15 +1,14 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { Settings, Room} from '../index'
-
 import './style.css'
 
 const Home = () => {
   return (
     <>
-      <div>
-        <h1>Welcome to Let's get Quzzical!</h1>
-        <div id='Container'>
+      <div id='container'>
+        <h1 id='head'>Welcome to Let's get Quzzical!</h1>
+        <div id='card'>
           <p>Please select an option: </p>
           <div id='buttons'>
           <Link to='/Settings'>
