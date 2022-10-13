@@ -74,7 +74,7 @@ const Settings = () => {
     
   }
 
-  const url = `https://opentdb.com/api.php?amount=10&category=${category}&difficulty=${difficulty}`
+  const url = `https://opentdb.com/api.php?amount=10&category=${category}&difficulty=${difficulty}&type=multiple`
 
   const fetchQuestions = () => {
     fetch(url)
@@ -133,7 +133,7 @@ const Settings = () => {
           variant="standard"
           margin="normal">
         </CssTextField>
-        <Link to='/Room'><button onClick={onClickFunctions} >Create A Room &#8594;</button></Link>
+        <button onClick={onClickFunctions} ><Link to='/Room'>Create A Room &#8594;</Link></button>
 
       </form>
 
