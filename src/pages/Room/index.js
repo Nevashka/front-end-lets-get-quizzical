@@ -17,6 +17,7 @@ const Room = () => {
   const [numPlayers, setNumPlayers] = useState(0)
   const [username, setUsername] = useState(null)
   const [players, setPlayers] = useState([''])
+  const [visible, setVisible] = useState(true);
   
   useEffect(() => {
     socket.on('join error', (msg) => {
@@ -58,6 +59,12 @@ const Room = () => {
   
   }
   
+  const removeElement = () => {
+    setVisible((prev) => !prev)
+  }
+
+  
+
   return (
     <>
       <h1>Room</h1>
@@ -69,8 +76,8 @@ const Room = () => {
         <label >Room: {roomName} </label>
         <input id="roomname" type="text" hidden={hidden} onChange={handleChangeRoom} style={{ backgroundColor: 'white', color: 'black' }}></input>
         <button id="join" onClick={joinRoom} hidden={hidden}>Join Room</button>
+        {visible && <Link to='Questions'><button id='play' hidden={!hidden} onClick={removeElement}>Start Game</button></Link>}
         
-        <Link to='Questions'><button id='play' hidden={!hidden} onClick={startGame}>Start Game</button></Link>
 
         <Outlet />
       </div>
