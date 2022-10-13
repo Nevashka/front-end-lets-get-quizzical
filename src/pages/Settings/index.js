@@ -47,7 +47,6 @@ const CssTextField = styled(TextField)({
 const Settings = () => {
   const [category, setCat] = useState('')
   const [difficulty, setDiff] = useState('')
-  const [type, setType] = useState('')
   const [roomName, setRoomName] = useState(null)
 
   const createRoom = () => {
@@ -55,7 +54,7 @@ const Settings = () => {
     console.log('creating room')
   }
 
-  console.log('in settings', { category }, { difficulty }, { type })
+  console.log('in settings', { category }, { difficulty })
 
   const dispatch = useDispatch()
 
@@ -75,7 +74,7 @@ const Settings = () => {
     
   }
 
-  const url = `https://opentdb.com/api.php?amount=10&category=${category}&difficulty=${difficulty}`
+  const url = `https://opentdb.com/api.php?amount=10&category=${category}&difficulty=${difficulty}&type=multiple`
 
   const fetchQuestions = () => {
     fetch(url)

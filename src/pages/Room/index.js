@@ -88,7 +88,7 @@ const Room = () => {
 
   return (
     <>
-      <h1>Room</h1>
+      {/* <h1>Room</h1> */}
 
       <div id="join-button">
         
