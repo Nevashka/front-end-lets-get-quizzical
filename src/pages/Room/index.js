@@ -13,6 +13,7 @@ import './style.css'
 const socket = io('http://localhost:5001');
 
 const Room = () => {
+  const questions = useSelector(state => state.questions)
   const [hidden, sethidden] = useState(false)
   const [roomName, setRoomName] = useState(null);
   const [numPlayers, setNumPlayers] = useState(0)
@@ -46,9 +47,13 @@ const Room = () => {
       console.log('lets begin innit')
       setRedirect(data)
     })
+
     
   }, []);
-
+  const handleQuestions = () => {
+    socket.emit('share questions', questions)
+    
+  }
   const navigate = useNavigate()
   useEffect(() => {
     console.log('updating redirect')
@@ -82,6 +87,7 @@ const Room = () => {
   function onClinckFunctions () {
     removeElement();
     startGame()
+    handleQuestions()
   }
 
   return (
