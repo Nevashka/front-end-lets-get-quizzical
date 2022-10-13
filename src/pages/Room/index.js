@@ -19,11 +19,7 @@ const Room = () => {
   const [username, setUsername] = useState(null)
   const [players, setPlayers] = useState([''])
   const [visible, setVisible] = useState(true);
-  const category = useSelector(state => state.category);
-  const difficulty = useSelector(state => state.difficulty);
 
-  
-  
   useEffect(() => {
     socket.on('join error', (msg) => {
       console.log(msg)
@@ -68,6 +64,11 @@ const Room = () => {
     setVisible((prev) => !prev)
   }
 
+  function onClinckFunctions () {
+    removeElement();
+    startGame()
+  }
+
   return (
     <>
       <h1>Room</h1>
@@ -79,7 +80,7 @@ const Room = () => {
         <label >Room: {roomName} </label>
         <input id="roomname" type="text" hidden={hidden} onChange={handleChangeRoom} style={{ backgroundColor: 'white', color: 'black' }}></input>
         <button id="join" onClick={joinRoom} hidden={hidden}>Join Room</button>
-        {visible && <Link to='Questions'><button id='play' hidden={!hidden} onClick={removeElement}>Start Game</button></Link>}
+        {visible && <Link to='Questions'><button id='play' hidden={!hidden} onClick={onClinckFunctions}>Start Game</button></Link>}
         
 
         <Outlet />
