@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux'
 import { fetchQuestions } from '../../actions';
+import { decode } from "html-entities";
+
+
 import io from 'socket.io-client';
 
 const socket = io('http://localhost:5001');
@@ -33,7 +36,7 @@ const Questions = () => {
   return (
     <>
       <h2>question {questionidx + 1} </h2>
-      <h3>{questions[questionidx].question}</h3>
+      <h3>{decode(questions[questionidx].question)}</h3>
       <ul>
         {/* {questions[0]} */}
       </ul>
