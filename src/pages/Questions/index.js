@@ -1,14 +1,32 @@
-import { useEffect } from 'react';
-import { useSelector,useDispatch } from 'react-redux'
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux'
 import { fetchQuestions } from '../../actions';
+import io from 'socket.io-client';
+
+const socket = io('http://localhost:5001');
+
 
 const Questions = () => {
-  // const category = useSelector(state => state.category)
-  // const difficulty = useSelector(state => state.difficulty)
   const questions = useSelector(state => state.questions)
   const questionidx = useSelector(state =>state.qidx)
+  // const questions = fetchQuestions({category: category}, {difficulty: difficulty}, {type: type})
+  // console.log('questions', questions)
+  const [seconds, setSeconds] = useState(0)
 
-  
+  useEffect(() => {
+    
+
+    socket.emit('start', 'we done it')
+    
+  }, [])
+  useEffect(() => {
+    // stop =setInterval(() => {
+    //   setSeconds(seconds => seconds + 1);
+    // }, 1000);
+
+  }, [seconds])
+
+
   console.log('questions', questions)
  
  
@@ -19,7 +37,6 @@ const Questions = () => {
       <ul>
         {/* {questions[0]} */}
       </ul>
-
     </>
   )
 };
