@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import io from 'socket.io-client'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import TextField from '@mui/material/TextField';
 import AccountCircle from '@mui/icons-material/AccountCircle';
@@ -48,10 +48,11 @@ const Settings = () => {
   const [category, setCat] = useState('')
   const [loading,setLoading] = useState(false)
   const [difficulty, setDiff] = useState('')
-  const [roomName, setRoomName] = useState(null)
+  const [roomName, setRoomName] = useState('')
+  const questions = useSelector(state => state.questions)
 
   const createRoom = () => {
-    
+   
   }
 
   console.log('in settings', { category }, { difficulty })
@@ -90,9 +91,12 @@ const Settings = () => {
 
   function onClickFunctions() {
     fetchQuestions();
-    // loading ? console.log('i am loading the questions, wait pls'): createRoom() 
+    loading ? console.log('i am loading the questions, wait pls'): createRoom()     
+    socket.emit('share questions', questions)
     socket.emit('create room', { room: roomName })
     console.log('creating room')
+  
+    
   }
 
   return (

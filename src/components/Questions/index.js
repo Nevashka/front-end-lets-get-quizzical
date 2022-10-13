@@ -8,16 +8,13 @@ const socket = io('http://localhost:5001');
 
 
 const Questions = () => {
+  const [Questions, setQuestions] = useState([])
   const [answers, setAnswers] = useState([])
   const [index, setIndex] = useState('loading questions...')
-  const [Questions, setQuestions] = useState([])
   const questions = useSelector(state => state.questions)
   const questionidx = useSelector(state => state.qidx)
 
   const [renderQuestion, setRenderQuestion] = useState([false, false, false, false, false, false, false, false, false, false])
-
-  useEffect(() => {
-    
 
     socket.on('load question', index => {
       setRenderQuestion((prev) => {
@@ -33,31 +30,27 @@ const Questions = () => {
     socket.emit('start', 'we done it')
     socket.on('send questions', (data) => {
       setQuestions(data)
-      // console.log(data)
+      
     })
     
-    
-  }, [])
 
  
     const getAnswers = (index) => {
       let options = []
       let incorrect = decode(questions[index].incorrect_answers)
       let correct = decode(questions[index].correct_answer)
-      socket.on('send questions', (data) => {
-        setQuestions(data)
-        // console.log(data)
-      })
 
       const incorrectOptions = incorrect.map(ans => options.push(ans))
       const correctOptions = options.push(correct)
 
       setAnswers(options.sort(() => Math.random() - 0.5))
-    };
+    
+  }
 
     console.log('in questions', questions)
 
     return (
+
       <div>
         <h2> {index} </h2>
 
