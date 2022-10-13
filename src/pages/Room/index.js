@@ -3,7 +3,7 @@
 //create a user socket in the server and in the client
 import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
-import { Link,Outlet } from 'react-router-dom'
+import { Link, Outlet, Navigate, useNavigate } from 'react-router-dom'
 import { fetchQuestions } from '../../actions';
 import { useSelector, useDispatch } from 'react-redux'
 import { BackButton } from '../../components';
@@ -20,6 +20,7 @@ const Room = () => {
   const [numPlayers, setNumPlayers] = useState(0)
   const [username, setUsername] = useState(null)
   const [players, setPlayers] = useState([''])
+  const [redirect, setRedirect] = useState(false)
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {
@@ -43,7 +44,20 @@ const Room = () => {
       setPlayers(data)
 
     })
+    socket.on('Begin', data => {
+      console.log('lets begin innit')
+      setRedirect(data)
+    })
+    
   }, []);
+
+  const navigate = useNavigate()
+  useEffect(() => {
+    console.log('updating redirect')
+    if(redirect){
+      navigate('/Room/Questions')
+    }
+  }, [redirect])
 
   const handleChangeRoom = (e) => {
     setRoomName(e.target.value)
@@ -59,7 +73,8 @@ const Room = () => {
 
   const startGame = () => {
     console.log('starting the game')
-  
+    socket.emit('starting the game', {room: roomName})
+    
   }
   
   const removeElement = () => {
