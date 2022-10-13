@@ -35,3 +35,16 @@ h1{
     justify-content: center;
     align-items: center;
 }
+
+#Room {
+    margin-top:20vh;
+    background-color: var(--bgBlue);
+}
+
+#room, #Room {
+    padding-top: 20px;
+}
+
+input, #username {
+    background-color: red;
+}

@@ -7,7 +7,7 @@ import './App.css'
 function App() {
 
   return (
-   
+    <>
       <div id = 'app'>
 
           <Routes>
@@ -17,7 +17,7 @@ function App() {
               <Route path='/Leaderboard' element={<Leaderboard />}/>
           </Routes>  
       </div>
-   
+    </>
   );
 
 }

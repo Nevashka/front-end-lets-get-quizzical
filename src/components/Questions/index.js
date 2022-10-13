@@ -8,7 +8,6 @@ const socket = io('http://localhost:5001');
 
 
 const Questions = () => {
-  const [Questions, setQuestions] = useState([])
   const [answers, setAnswers] = useState([])
   const [index, setIndex] = useState('loading questions...')
   const questions = useSelector(state => state.questions)
@@ -40,8 +39,8 @@ const Questions = () => {
       let incorrect = decode(questions[index].incorrect_answers)
       let correct = decode(questions[index].correct_answer)
 
-      const incorrectOptions = incorrect.map(ans => options.push(ans))
-      const correctOptions = options.push(correct)
+//       const incorrectOptions = incorrect.map(ans => options.push(ans))
+//       const correctOptions = options.push(correct)
 
       setAnswers(options.sort(() => Math.random() - 0.5))
     

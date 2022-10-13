@@ -2,20 +2,22 @@
     --bgBlue: #002837;
     --lighterBlue: #2d7a8f;
     --green: #5bba6f;
-  }
+}
 
 * {
-    color:white;
+    color: white;
     display: border-box;
     padding: 0;
     margin: 0;
+    font-family: 'Hind', sans-serif;
+    font-family: 'Ubuntu', sans-serif;
 }
 
 html {
     background-color: var(--bgBlue);
-    /* background-image: url('./background.png'); */
+    background-image: url('./background.png');
 }
 
 #app {
-    /* background-image: url('./background.png'); */
+    background-image: url('./background.png');
 }

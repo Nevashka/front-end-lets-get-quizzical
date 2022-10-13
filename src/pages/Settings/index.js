@@ -91,10 +91,11 @@ const Settings = () => {
 
   function onClickFunctions() {
     fetchQuestions();
-    loading ? console.log('i am loading the questions, wait pls'): createRoom()     
+    loading ? console.log('i am loading the questions, wait pls'): createRoom() 
+
+    
     socket.emit('share questions', questions)
-    socket.emit('create room', { room: roomName })
-    console.log('creating room')
+  
   
     
   }
@@ -103,7 +104,7 @@ const Settings = () => {
     
     <>
     <div className='settings'>
-      <h1>Questions</h1>
+      <h2>Question settings</h2>
 
       <form >
 
@@ -147,7 +148,8 @@ const Settings = () => {
       </form>
 
     </div>
-    <BackButton/>
+    <div className='back'> <BackButton/></div>
+    
   
    </>
   )
