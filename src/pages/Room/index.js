@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux'
 import io from 'socket.io-client';
-import { BackButton  } from '../../components';
+import { BackButton } from '../../components';
 import { decode } from "html-entities";
 
 import './style.css'
@@ -20,6 +20,7 @@ const Room = () => {
   const [players, setPlayers] = useState([''])
   const [visible, setVisible] = useState(true);
   const [answers, setAnswers] = useState([])
+
   const [questionNum, setQuestionNum] = useState('loading questions...')
   const [buttonDisable, setButtonDisable] = useState([false,false, false, false, false, false, false, false, false, false, false])
   const [score, setScore] = useState(0)
@@ -55,7 +56,9 @@ const Room = () => {
       setVisible(false)
     })
     socket.on('send questions', (data) => {
-      console.log(data)
+
+
+
       setQuestions(data)
       
       // console.log('data',data)
@@ -65,6 +68,7 @@ const Room = () => {
     socket.on('load question', index => {
       console.log(`loading question ${index + 1}`)
       setRenderQuestion((prev) => {
+
         prev[index] = true
         return[...prev]
       })
@@ -84,6 +88,7 @@ const Room = () => {
     })
     
     
+
   }, []);
   
   
@@ -96,9 +101,11 @@ const Room = () => {
     console.log(index)
     setQuestionNum(`Question: ${index + 1}`)
     
+
   };
   
   
+
   const handleChangeRoom = (e) => {
     setRoomName(e.target.value)
   }
@@ -124,16 +131,17 @@ const Room = () => {
   }
 
   function onClickFunctions() {
-    
+
     removeElement();
     startGame()
-    
+
     handleQuestions()
     
     
   }
   
   
+
 
   const handleClick = () =>{
     
@@ -155,8 +163,9 @@ const Room = () => {
   console.log('buttons', buttonDisable)
   console.log('Your score:', score)
   
+
   return (
-    <>
+    <div id='Room'>
       {visible && <div id='room' >
 
         <div id="join-button">
@@ -185,7 +194,7 @@ const Room = () => {
         {visible && <BackButton hidden={hidden} />}
 
       </div>}
-      
+
 
       {!visible &&<div id='questions' >
       <div>
@@ -260,8 +269,9 @@ const Room = () => {
         
            
 
+
       </div>}
-    </>
+    </div>
   )
 }
 
