@@ -174,8 +174,8 @@ const Settings = () => {
           value={type}
           onChange={handleType}
         >
-          <MenuItem key='Multiple Choice' value='multipleChoice'>Muiltple Choice</MenuItem>
-          <MenuItem key='TrueFalse' value='trueFalse'>True/False</MenuItem>
+          <MenuItem key='Multiple Choice' value='multiple'>Muiltple Choice</MenuItem>
+          <MenuItem key='TrueFalse' value='boolean'>True/False</MenuItem>
           <MenuItem key='Combonation' value='combination'>Combination</MenuItem>
         </CssTextField>
 
