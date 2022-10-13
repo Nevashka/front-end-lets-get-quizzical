@@ -27,7 +27,6 @@ const Questions = () => {
       getAnswers(index)
       setIndex(`Question: ${index + 1}`)
     })
-    socket.emit('start', 'we done it')
     socket.on('send questions', (data) => {
       setQuestions(data)
       // console.log(data)
