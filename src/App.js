@@ -13,9 +13,7 @@ function App() {
           <Routes>
               <Route path='/' element={<Home />}/>
               <Route path='/Settings' element={<Settings />}/>
-              <Route path='/Room' element={<Room />}>
-               <Route path=':Questions' element={<Questions />}/>
-              </Route>
+              <Route path='/Room' element={<Room />}></Route>
               <Route path='/Leaderboard' element={<Leaderboard />}/>
           </Routes>  
         </main>

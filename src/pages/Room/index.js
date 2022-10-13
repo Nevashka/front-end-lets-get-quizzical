@@ -66,6 +66,7 @@ const Room = () => {
     console.log('updating redirect')
     if(redirect){
       navigate('/Room/Questions')
+      
     }
   }, [redirect])
 
