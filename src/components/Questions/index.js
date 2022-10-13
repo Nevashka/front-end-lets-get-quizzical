@@ -27,11 +27,8 @@ const Questions = () => {
       getAnswers(index)
       setIndex(`Question: ${index + 1}`)
     })
-<<<<<<< HEAD:src/components/Questions/index.js
-=======
 
     socket.emit('start', 'we done it')
->>>>>>> 596bec404ef34d6ddae0bd51b2ad30dd6010a12a:src/pages/Questions/index.js
     socket.on('send questions', (data) => {
       setQuestions(data)
       // console.log(data)
@@ -39,8 +36,6 @@ const Questions = () => {
     
     
   }, [])
-
-  useEffect(() => {
 
  
     const getAnswers = (index) => {
@@ -67,9 +62,9 @@ const Questions = () => {
     return (
       <div>
         <h2> {index} </h2>
-        {/* <h3>{decode(questions[questionidx].question)}</h3> */}
+        <h3>{index}</h3>
 
-        <ul>
+        {/* <ul>
           <li hidden={!renderQuestion[0]}>{decode(questions[0].question)}</li>
           <li hidden={!renderQuestion[1]}>{decode(questions[1].question)}</li>
           <li hidden={!renderQuestion[2]}>{decode(questions[2].question)}</li>
@@ -88,13 +83,12 @@ const Questions = () => {
             })
           }
         </div>
-        </ul>
+        </ul> */}
       </div>
 
 
 
     )
   };
-
   export default Questions
 
