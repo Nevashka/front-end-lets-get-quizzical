@@ -14,11 +14,11 @@ const Questions = () => {
   const questions = useSelector(state => state.questions)
   const questionidx = useSelector(state => state.qidx)
 
-
   const [renderQuestion, setRenderQuestion] = useState([false, false, false, false, false, false, false, false, false, false])
 
   useEffect(() => {
     
+
     socket.on('load question', index => {
       setRenderQuestion((prev) => {
         prev[index] = !prev[index]
@@ -27,6 +27,7 @@ const Questions = () => {
       getAnswers(index)
       setIndex(`Question: ${index + 1}`)
     })
+
     socket.emit('start', 'we done it')
     socket.on('send questions', (data) => {
       setQuestions(data)
@@ -36,6 +37,7 @@ const Questions = () => {
     
   }, [])
 
+  useEffect(() => {
 
  
     const getAnswers = (index) => {
@@ -56,12 +58,13 @@ const Questions = () => {
 
 
 
+
+
+
     return (
       <div>
         <h2> {index} </h2>
         {/* <h3>{decode(questions[questionidx].question)}</h3> */}
-
-        
 
         <ul>
           <li hidden={!renderQuestion[0]}>{decode(questions[0].question)}</li>
@@ -84,6 +87,7 @@ const Questions = () => {
         </div>
         </ul>
       </div>
+
 
 
     )
