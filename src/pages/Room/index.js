@@ -12,7 +12,7 @@ const socket = io('http://localhost:5001');
 
 const Room = () => {
   const questions = useSelector(state => state.questions)
-  const [Questions, setQuestions] = useState([{question: 'question'},{question: 'question'},{question: 'question'},{question: 'question'},{question: 'question'},{question: 'question'},{question: 'question'},{question: 'question'},{question: 'question'},{question: 'question'}])
+  const [Questions, setQuestions] = useState([{question: 'question',incorrect_answers:['A','B','C'],correct_answer:'a'},{question: 'question',incorrect_answers:['A','B','C'],correct_answer:'a'},{question: 'question',incorrect_answers:['A','B','C'],correct_answer:'a'},{question: 'question',incorrect_answers:['A','B','C'],correct_answer:'a'},{question: 'question',incorrect_answers:['A','B','C'],correct_answer:'a'},{question: 'question',incorrect_answers:['A','B','C'],correct_answer:'a'},{question: 'question',incorrect_answers:['A','B','C'],correct_answer:'a'},{question: 'question',incorrect_answers:['A','B','C'],correct_answer:'a'},{question: 'question',incorrect_answers:['A','B','C'],correct_answer:'a'},{question: 'question',incorrect_answers:['A','B','C'],correct_answer:'a'}])
   const [hidden, sethidden] = useState(false)
   const [roomName, setRoomName] = useState(null);
   const [numPlayers, setNumPlayers] = useState(0)
@@ -21,6 +21,10 @@ const Room = () => {
   const [visible, setVisible] = useState(true);
   const [answers, setAnswers] = useState([])
   const [questionNum, setQuestionNum] = useState('loading questions...')
+  const [buttonDisable, setButtonDisable] = useState([false,false, false, false, false, false, false, false, false, false, false])
+  const [score, setScore] = useState(0)
+  const [scoreState, setScoreState] = useState(false)
+
   // const questionidx = useSelector(state => state.qidx)
   
   const [renderQuestion, setRenderQuestion] = useState([false, false, false, false, false, false, false, false, false, false])
@@ -34,14 +38,14 @@ const Room = () => {
       console.log(msg)
       sethidden(false)
     })
-
+    
     socket.on('room size', data => {
       console.log(data)
       setNumPlayers(data)
     })
 
     socket.on('add player', data => {
-
+      
       console.log('updating players')
       setPlayers(data)
       
@@ -53,7 +57,7 @@ const Room = () => {
     socket.on('send questions', (data) => {
       console.log(data)
       setQuestions(data)
-
+      
       // console.log('data',data)
       // setQuestions(questions)
       // console.log(data)
@@ -61,13 +65,22 @@ const Room = () => {
     socket.on('load question', index => {
       console.log(`loading question ${index + 1}`)
       setRenderQuestion((prev) => {
-        prev[index] = !prev[index]
+        prev[index] = true
         return[...prev]
       })
-      getAnswers(index)
+      setButtonDisable((prev) => {
+        prev[index] = true
+        return[...prev]
+      })
       
-      setQuestionNum(`Question: ${index + 1}`)
+      
+      
+      getAnswers(index)
       console.log(' question number',questionNum)
+    })
+
+    socket.on('load score', data => {
+      setScoreState(true)
     })
     
     
@@ -81,19 +94,8 @@ const Room = () => {
   const getAnswers = (index) => {
     console.log('getting answers')
     console.log(index)
-    let options = []
-    let incorrect = decode(Questions[index].incorrect_answers)
-    let correct = decode(Questions[index].correct_answer)
-    socket.on('send questions', (data) => {
-      console.log('receiving the questions:', data)
-      setQuestions(data)
-      // console.log(data)
-    })
+    setQuestionNum(`Question: ${index + 1}`)
     
-    const incorrectOptions = incorrect.map(ans => options.push(ans))
-    const correctOptions = options.push(correct)
-    
-    setAnswers(options.sort(() => Math.random() - 0.5))
   };
   
   
@@ -111,10 +113,10 @@ const Room = () => {
   
   const startGame = () => {
     console.log('starting the game')
-   
+    
     socket.emit('start', { room: roomName })
     
-
+    
   }
 
   const removeElement = () => {
@@ -127,12 +129,32 @@ const Room = () => {
     startGame()
     
     handleQuestions()
-
-
+    
+    
   }
+  
+  
+
+  const handleClick = () =>{
+    
+    console.log('nada')
+  }
+  const handleClickCorrect = () =>{
+    setScore((prev) => prev + 10)
+    console.log('Correct!')
+  }
+  
+  // const disableButtons = (index) => {
+
+  // }
+
   console.log('Q',Questions)
   console.log('q',questions)
   console.log('answers',answers)
+  console.log('switch', renderQuestion)
+  console.log('buttons', buttonDisable)
+  console.log('Your score:', score)
+  
   return (
     <>
       {visible && <div id='room' >
@@ -151,8 +173,8 @@ const Room = () => {
 
         <div id="players">
           {visible && <p>Total players waiting: {numPlayers}</p>}
-          <p hidden={hidden}> Players in game:</p>
-          <ul hidden={hidden}>
+          <p hidden={!hidden}> Players in game:</p>
+          <ul hidden={!hidden}>
             {
               players.map((player, i) => {
                 return <li key={i}>{player}</li>
@@ -174,15 +196,56 @@ const Room = () => {
 
           
           <li hidden={!renderQuestion[0]}>{decode(Questions[0].question)}</li>
+          <button hidden={!renderQuestion[0]} onClick={handleClick} disabled={buttonDisable[1]}>{decode(Questions[0].incorrect_answers[0])}</button>
+          <button hidden={!renderQuestion[0]} onClick={handleClick} disabled={buttonDisable[1]}>{decode(Questions[0].incorrect_answers[1])}</button>
+          <button hidden={!renderQuestion[0]} onClick={handleClick} disabled={buttonDisable[1]}>{decode(Questions[0].incorrect_answers[2])}</button>
+          <button hidden={!renderQuestion[0]} onClick={handleClickCorrect} disabled={buttonDisable[1]}>{decode(Questions[0].correct_answer)}</button>
+          
           <li hidden={!renderQuestion[1]}>{decode(Questions[1].question)}</li>
+          <button hidden={!renderQuestion[1]} onClick={handleClick} disabled={buttonDisable[2]}>{decode(Questions[1].incorrect_answers[0])}</button>
+          <button hidden={!renderQuestion[1]} onClick={handleClick}disabled={buttonDisable[2]}>{decode(Questions[1].incorrect_answers[1])}</button>
+          <button hidden={!renderQuestion[1]} onClick={handleClick}disabled={buttonDisable[2]}>{decode(Questions[1].incorrect_answers[2])}</button>
+          <button hidden={!renderQuestion[1]} onClick={handleClickCorrect}disabled={buttonDisable[2]}>{decode(Questions[1].correct_answer)}</button>
           <li hidden={!renderQuestion[2]}>{decode(Questions[2].question)}</li>
+          <button hidden={!renderQuestion[2]} onClick={handleClick}disabled={buttonDisable[3]}>{decode(Questions[2].incorrect_answers[0])}</button>
+          <button hidden={!renderQuestion[2]} onClick={handleClick}disabled={buttonDisable[3]}>{decode(Questions[2].incorrect_answers[1])}</button>
+          <button hidden={!renderQuestion[2]} onClick={handleClick}disabled={buttonDisable[3]}>{decode(Questions[2].incorrect_answers[2])}</button>
+          <button hidden={!renderQuestion[2]} onClick={handleClickCorrect}disabled={buttonDisable[3]}>{decode(Questions[2].correct_answer)}</button>
           <li hidden={!renderQuestion[3]}>{decode(Questions[3].question)}</li>
+          <button hidden={!renderQuestion[3]} onClick={handleClick}disabled={buttonDisable[4]}>{decode(Questions[3].incorrect_answers[0])}</button>
+          <button hidden={!renderQuestion[3]} onClick={handleClick} disabled={buttonDisable[4]}>{decode(Questions[3].incorrect_answers[1])}</button>
+          <button hidden={!renderQuestion[3]} onClick={handleClick} disabled={buttonDisable[4]}>{decode(Questions[3].incorrect_answers[2])}</button>
+          <button hidden={!renderQuestion[3]} onClick={handleClickCorrect} disabled={buttonDisable[4]}>{decode(Questions[3].correct_answer)}</button>
           <li hidden={!renderQuestion[4]}>{decode(Questions[4].question)}</li>
+          <button hidden={!renderQuestion[4]} onClick={handleClick}disabled={buttonDisable[5]}>{decode(Questions[4].incorrect_answers[0])}</button>
+          <button hidden={!renderQuestion[4]} onClick={handleClick}disabled={buttonDisable[5]}>{decode(Questions[4].incorrect_answers[1])}</button>
+          <button hidden={!renderQuestion[4]} onClick={handleClick}disabled={buttonDisable[5]}>{decode(Questions[4].incorrect_answers[2])}</button>
+          <button hidden={!renderQuestion[4]} onClick={handleClickCorrect}disabled={buttonDisable[5]}>{decode(Questions[4].correct_answer)}</button>
           <li hidden={!renderQuestion[5]}>{decode(Questions[5].question)}</li>
+          <button hidden={!renderQuestion[5]} onClick={handleClick}disabled={buttonDisable[6]}>{decode(Questions[5].incorrect_answers[0])}</button>
+          <button hidden={!renderQuestion[5]} onClick={handleClick}disabled={buttonDisable[6]}>{decode(Questions[5].incorrect_answers[1])}</button>
+          <button hidden={!renderQuestion[5]} onClick={handleClick}disabled={buttonDisable[6]}>{decode(Questions[5].incorrect_answers[2])}</button>
+          <button hidden={!renderQuestion[5]} onClick={handleClickCorrect}disabled={buttonDisable[6]}>{decode(Questions[5].correct_answer)}</button>
           <li hidden={!renderQuestion[6]}>{decode(Questions[6].question)}</li>
+          <button hidden={!renderQuestion[6]} onClick={handleClick} disabled={buttonDisable[7]}>{decode(Questions[6].incorrect_answers[0])}</button>
+          <button hidden={!renderQuestion[6]} onClick={handleClick} disabled={buttonDisable[7]}>{decode(Questions[6].incorrect_answers[1])}</button>
+          <button hidden={!renderQuestion[6]} onClick={handleClick} disabled={buttonDisable[7]}>{decode(Questions[6].incorrect_answers[2])}</button>
+          <button hidden={!renderQuestion[6]} onClick={handleClickCorrect} disabled={buttonDisable[7]}>{decode(Questions[6].correct_answer)}</button>
           <li hidden={!renderQuestion[7]}>{decode(Questions[7].question)}</li>
+          <button hidden={!renderQuestion[7]} onClick={handleClick} disabled={buttonDisable[8]}>{decode(Questions[7].incorrect_answers[0])}</button>
+          <button hidden={!renderQuestion[7]} onClick={handleClick} disabled={buttonDisable[8]}>{decode(Questions[7].incorrect_answers[1])}</button>
+          <button hidden={!renderQuestion[7]} onClick={handleClick} disabled={buttonDisable[8]}>{decode(Questions[7].incorrect_answers[2])}</button>
+          <button hidden={!renderQuestion[7]} onClick={handleClickCorrect} disabled={buttonDisable[8]}>{decode(Questions[7].correct_answer)}</button>
           <li hidden={!renderQuestion[8]}>{decode(Questions[8].question)}</li>
+          <button hidden={!renderQuestion[8]} onClick={handleClick} disabled={buttonDisable[9]}>{decode(Questions[8].incorrect_answers[0])}</button>
+          <button hidden={!renderQuestion[8]} onClick={handleClick} disabled={buttonDisable[9]}>{decode(Questions[8].incorrect_answers[1])}</button>
+          <button hidden={!renderQuestion[8]} onClick={handleClick} disabled={buttonDisable[9]}>{decode(Questions[8].incorrect_answers[2])}</button>
+          <button hidden={!renderQuestion[8]} onClick={handleClickCorrect} disabled={buttonDisable[9]}>{decode(Questions[8].correct_answer)}</button>
           <li hidden={!renderQuestion[9]}>{decode(Questions[9].question)}</li>
+          <button hidden={!renderQuestion[9]} onClick={handleClick} disabled={buttonDisable[10]}>{decode(Questions[9].incorrect_answers[0])}</button>
+          <button hidden={!renderQuestion[9]} onClick={handleClick} disabled={buttonDisable[10]}>{decode(Questions[9].incorrect_answers[1])}</button>
+          <button hidden={!renderQuestion[9]} onClick={handleClick} disabled={buttonDisable[10]}>{decode(Questions[9].incorrect_answers[2])}</button>
+          <button hidden={!renderQuestion[9]} onClick={handleClickCorrect} disabled={buttonDisable[10]}>{decode(Questions[9].correct_answer)}</button>
 
           <div >
           {
@@ -193,6 +256,7 @@ const Room = () => {
         </div>
         </ul>
       </div>
+      <p hidden={!scoreState}>Your Score:{score}</p>
         
            
 
