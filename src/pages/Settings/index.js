@@ -58,51 +58,18 @@ const Settings = () => {
     console.log('creating room')
   }
 
-  console.log('in settings', {category},{difficulty},{type})
+  console.log('in settings', { category }, { difficulty }, { type })
 
   const dispatch = useDispatch()
 
-//  const handleFormSubmit = (e) => {
-//   e.preventDefault()
-
-  
-//     dispatch({
-//       type: 'LOAD_CATEGORY',
-//       payload: {category}
-//     })
-  
-  
-//     dispatch({
-//       type: 'LOAD_DIFFICULTY',
-//       payload: {difficulty}
-//     })
-  
-  
-//     dispatch({
-//       type: 'LOAD_TYPE',
-//       payload:{ type}
-//     })
-//   }
-
-  // const handleCategory = e => {
-  //   setCat(e.target.value)
-  // }
-  // const handleDifficulty= e => {
-  //   setDiff(e.target.value)
-  // }
-  // const handleType= e => {
-  //   setType(e.target.value)
-  // }
-  
-  const handleCategory= event => {
+  const handleCategory = event => {
     setCat(event.target.value)
     dispatch({
       type: 'LOAD_CATEGORY',
       payload: event.target.value
     })
-    
   }
-  
+
   const handleDifficulty = event => {
     setDiff(event.target.value)
     dispatch({
@@ -198,8 +165,8 @@ const Settings = () => {
         <Link to='/Room'><button onClick={createRoom} >Create A Room &#8594;</button></Link>
 
       </form>
-     
+
     </div>
   )
-}; 
+};
 export default Settings
