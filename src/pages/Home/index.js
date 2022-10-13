@@ -1,12 +1,16 @@
 import React from 'react'
-import { Link, Router } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { Settings, Room} from '../index'
 import './style.css'
 
 const Home = () => {
   return (
    
+<<<<<<< HEAD
     
+=======
+    <>
+>>>>>>> 5e66a0135a95f212cada44a74acc95bf4b7e2644
       <div id='container'>
         <h1 id='head'>Welcome to Let's get Quzzical!</h1>
         <div id='card'>
@@ -21,7 +25,11 @@ const Home = () => {
         </div>
         </div>
       </div>
+<<<<<<< HEAD
     
+=======
+    </>
+>>>>>>> 5e66a0135a95f212cada44a74acc95bf4b7e2644
     
   )
 }
