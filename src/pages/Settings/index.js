@@ -74,7 +74,7 @@ const Settings = () => {
     
   }
 
-  const url = `https://opentdb.com/api.php?amount=10&category=${category}&difficulty=${difficulty}`
+  const url = `https://opentdb.com/api.php?amount=10&category=${category}&difficulty=${difficulty}&type=multiple`
 
   const fetchQuestions = () => {
     fetch(url)
