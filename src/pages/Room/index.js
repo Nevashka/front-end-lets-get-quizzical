@@ -1,6 +1,4 @@
-//socket between room and server?
-//Game is called here?
-//create a user socket in the server and in the client
+
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux'
 import io from 'socket.io-client';
@@ -11,9 +9,10 @@ import './style.css'
 
 const socket = io('http://localhost:5001');
 
+
 const Room = () => {
   const questions = useSelector(state => state.questions)
-  const [Questions, setQuestions] = useState([])
+  const [Questions, setQuestions] = useState([{question: 'question'},{question: 'question'},{question: 'question'},{question: 'question'},{question: 'question'},{question: 'question'},{question: 'question'},{question: 'question'},{question: 'question'},{question: 'question'}])
   const [hidden, sethidden] = useState(false)
   const [roomName, setRoomName] = useState(null);
   const [numPlayers, setNumPlayers] = useState(0)
@@ -22,11 +21,13 @@ const Room = () => {
   const [visible, setVisible] = useState(true);
   const [answers, setAnswers] = useState([])
 
+
   const [index, setIndex] = useState('loading questions...')
+
   // const questionidx = useSelector(state => state.qidx)
-
+  
   const [renderQuestion, setRenderQuestion] = useState([false, false, false, false, false, false, false, false, false, false])
-
+ 
   useEffect(() => {
     socket.on('join error', (msg) => {
       console.log(msg)
@@ -46,7 +47,7 @@ const Room = () => {
 
       console.log('updating players')
       setPlayers(data)
-
+      
     })
     socket.on('Begin', data => {
       console.log('lets begin innit')
@@ -54,43 +55,58 @@ const Room = () => {
     })
     socket.on('send questions', (data) => {
 
+
+
       setQuestions(data)
+
       // console.log('data',data)
       // setQuestions(questions)
       // console.log(data)
     })
     socket.on('load question', index => {
+      console.log(`loading question ${index + 1}`)
       setRenderQuestion((prev) => {
         prev[index] = !prev[index]
         return [...prev]
       })
       getAnswers(index)
 
+
       setIndex(`Question: ${index + 1}`)
     })
 
 
   }, []);
-
+  
+  
+  const handleQuestions = () => {
+    console.log('sharing questions')
+    socket.emit('share questions', {data:questions, room:roomName})
+  }
   const getAnswers = (index) => {
+    console.log('getting answers')
+    console.log(index)
     let options = []
-    let incorrect = decode(questions[index].incorrect_answers)
-    let correct = decode(questions[index].correct_answer)
+    let incorrect = decode(Questions[index].incorrect_answers)
+    let correct = decode(Questions[index].correct_answer)
     socket.on('send questions', (data) => {
-      // setQuestions(data)
+      console.log('receiving the questions:', data)
+      setQuestions(data)
       // console.log(data)
     })
-
+    
     const incorrectOptions = incorrect.map(ans => options.push(ans))
     const correctOptions = options.push(correct)
-
+    
     setAnswers(options.sort(() => Math.random() - 0.5))
+
 
   }
   const handleQuestions = () => {
     socket.emit('share questions', questions)
 
   }
+
 
   const handleChangeRoom = (e) => {
     setRoomName(e.target.value)
@@ -103,12 +119,12 @@ const Room = () => {
     socket.emit('join room', { room: roomName, player: username })
     sethidden(!hidden) // set hidden to true
   }
-
+  
   const startGame = () => {
     console.log('starting the game')
-    socket.emit('starting the game', { room: roomName })
-    socket.emit('start', 'we done it')
-
+   
+    socket.emit('start', { room: roomName })
+    
 
   }
 
@@ -120,6 +136,7 @@ const Room = () => {
 
     removeElement();
     startGame()
+
     handleQuestions()
 
 
@@ -127,6 +144,7 @@ const Room = () => {
   }
   console.log('Q', Questions)
   console.log('q', questions)
+
   return (
     <div id='Room'>
       {visible && <div id='room' >
@@ -159,6 +177,7 @@ const Room = () => {
       </div>}
 
 
+
       {!visible && <div id='questions' >
         <div>
           <h2> {index} </h2>
@@ -183,6 +202,7 @@ const Room = () => {
               }
             </div>
           </ul>
+
         </div>
 
 
@@ -192,4 +212,4 @@ const Room = () => {
   )
 }
 
-export default Room
+export default Room;
