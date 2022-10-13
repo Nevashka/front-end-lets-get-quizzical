@@ -2,18 +2,9 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux'
 import io from 'socket.io-client';
-<<<<<<< HEAD
-import { Link } from 'react-router-dom'
-import { BackButton } from '../../components';
-
-
-  
-
-
-=======
 import { BackButton, Questions } from '../../components';
+import { decode } from "html-entities";
 
->>>>>>> c62af5de0ede7d2c2eec2eac9480633e306ba47f
 import './style.css'
 
 const socket = io('http://localhost:5001');
@@ -27,6 +18,12 @@ const Room = () => {
   const [username, setUsername] = useState(null)
   const [players, setPlayers] = useState([''])
   const [visible, setVisible] = useState(true);
+  const [answers, setAnswers] = useState([])
+  const [index, setIndex] = useState('loading questions...')
+  const [Questions, setQuestions] = useState([])
+  const [renderQuestion, setRenderQuestion] = useState([false, false, false, false, false, false, false, false, false, false])
+  
+
 
   useEffect(() => {
     socket.on('join error', (msg) => {
@@ -51,23 +48,43 @@ const Room = () => {
     })
     socket.on('Begin', data => {
       console.log('lets begin innit')
-<<<<<<< HEAD
-      
-=======
       setVisible(false)
->>>>>>> c62af5de0ede7d2c2eec2eac9480633e306ba47f
+    })
+
+    socket.on('load question', index => {
+      setRenderQuestion((prev) => {
+        prev[index] = !prev[index]
+        return[...prev]
+      })
+      getAnswers(index)
+      setIndex(`Question: ${index + 1}`)
+    })
+
+    socket.emit('start', 'we done it')
+    socket.on('send questions', (data) => {
+      setQuestions(data)
+      
+      // console.log(data)
     })
 
 
   }, []);
-  const handleQuestions = () => {
-    socket.emit('share questions', questions)
 
-  }
-<<<<<<< HEAD
+  const getAnswers = (index) => {
+    let options = []
+    let incorrect = decode(questions[index].incorrect_answers)
+    let correct = decode(questions[index].correct_answer)
+    socket.on('send questions', (data) => {
+      setQuestions(data)
+      // console.log(data)
+    })
+
+    const incorrectOptions = incorrect.map(ans => options.push(ans))
+    const correctOptions = options.push(correct)
+
+    setAnswers(options.sort(() => Math.random() - 0.5))
+  };
   
-=======
->>>>>>> c62af5de0ede7d2c2eec2eac9480633e306ba47f
 
   const handleChangeRoom = (e) => {
     setRoomName(e.target.value)
@@ -97,7 +114,7 @@ const Room = () => {
     
     removeElement();
     startGame()
-    handleQuestions()
+    
     
 
 
@@ -132,15 +149,42 @@ const Room = () => {
         </div>
         {visible && <BackButton hidden={hidden} />}
 
-<<<<<<< HEAD
-        
-=======
->>>>>>> c62af5de0ede7d2c2eec2eac9480633e306ba47f
       </div>
 
-      <div id='questions' >
-        <Questions />
+      {!visible && <div id='questions' >
+
+     
+
+      <div>
+        <h2> {index} </h2>
+        {/* <h3>{decode(questions[questionidx].question)}</h3> */}
+
+        <ul>
+          <li hidden={!renderQuestion[0]}>{decode(Questions[0].question)}</li>
+          <li hidden={!renderQuestion[1]}>{decode(Questions[1].question)}</li>
+          <li hidden={!renderQuestion[2]}>{decode(Questions[2].question)}</li>
+          <li hidden={!renderQuestion[3]}>{decode(Questions[3].question)}</li>
+          <li hidden={!renderQuestion[4]}>{decode(Questions[4].question)}</li>
+          <li hidden={!renderQuestion[5]}>{decode(Questions[5].question)}</li>
+          <li hidden={!renderQuestion[6]}>{decode(Questions[6].question)}</li>
+          <li hidden={!renderQuestion[7]}>{decode(Questions[7].question)}</li>
+          <li hidden={!renderQuestion[8]}>{decode(Questions[8].question)}</li>
+          <li hidden={!renderQuestion[9]}>{decode(Questions[9].question)}</li>
+
+          <div >
+          {
+            answers.map((ans, i) => {
+              return <button key={i}>{ans}</button>
+            })
+          }
+        </div>
+        </ul>
       </div>
+       
+      
+        
+      
+      </div>}
     </>
   )
 }
