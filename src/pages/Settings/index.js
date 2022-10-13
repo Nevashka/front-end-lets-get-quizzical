@@ -47,7 +47,6 @@ const CssTextField = styled(TextField)({
 const Settings = () => {
   const [category, setCat] = useState('')
   const [difficulty, setDiff] = useState('')
-  const [type, setType] = useState('')
   const [roomName, setRoomName] = useState(null)
 
   const createRoom = () => {
@@ -55,7 +54,7 @@ const Settings = () => {
     console.log('creating room')
   }
 
-  console.log('in settings', { category }, { difficulty }, { type })
+  console.log('in settings', { category }, { difficulty })
 
   const dispatch = useDispatch()
 
@@ -131,13 +130,6 @@ const Settings = () => {
           id="roomName"
           label="Room Name"
           onChange={(e) => setRoomName(e.target.value)}
-          // InputProps={{
-            // startAdornment: (
-          //     <InputAdornment position="start">
-          //       {/* <AccountCircle /> */}
-          //     </InputAdornment>
-          //   ),
-          // }}
           variant="standard"
           margin="normal">
         </CssTextField>
