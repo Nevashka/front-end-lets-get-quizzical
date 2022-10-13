@@ -5,6 +5,7 @@ import InputAdornment from '@mui/material/InputAdornment';
 import { styled } from '@mui/material/styles'
 import MenuItem from '@mui/material/MenuItem';
 
+
 import io from 'socket.io-client'
 // import { Link } from '@mui/material';
 import { useDispatch } from 'react-redux'
@@ -77,12 +78,29 @@ const Settings = () => {
       payload: event.target.value
     })
   }
-  const handleType = event => {
-    setType(event.target.value)
-    dispatch({
-      type: 'LOAD_TYPE',
-      payload: event.target.value
+
+  const setQuestions = (results) => {
+    return ({
+      type:'SET_QUESTIONS',
+      payload: results
     })
+    
+  }
+
+  const url = `https://opentdb.com/api.php?amount=10&category=${category}&difficulty=${difficulty}`
+
+  const fetchQuestions = () => {
+    fetch(url)
+    .then(response => response.json())
+    .then(data => {
+      dispatch(setQuestions(data.results))
+      console.log('in room', data.results)
+    })
+  }
+
+  function onClickFunctions() {
+    fetchQuestions();
+    createRoom()
   }
 
   return (
@@ -91,20 +109,6 @@ const Settings = () => {
       <h1>Questions</h1>
 
       <form >
-        {/* <CssTextField
-          id="username"
-          label="Username"
-          margin="normal"
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <AccountCircle />
-              </InputAdornment>
-            ),
-          }}
-          variant="standard"
-          onChange={(e) => setUsername(e.target.value)}
-        /> */}
 
         <CssTextField
           id="categories"
@@ -134,20 +138,6 @@ const Settings = () => {
           <MenuItem key='Hard' value='hard'>Hard</MenuItem>
         </CssTextField>
 
-        {/* <CssTextField
-          id="qtype"
-          select
-          label="Select a type"
-          margin="normal"
-          value={type}
-          onChange={handleType}
-        >
-          <MenuItem key='Multiple' value='multiple'>Multiple Choice</MenuItem>
-          <MenuItem key='TrueFalse' value='boolean'>True/False</MenuItem>
-          <MenuItem key='Combonation' value=''>Combination</MenuItem>
-        </CssTextField>
-         */}
-
         <CssTextField
           id="roomName"
           label="Room Name"
@@ -162,7 +152,7 @@ const Settings = () => {
           variant="standard"
           margin="normal">
         </CssTextField>
-        <Link to='/Room'><button onClick={createRoom} >Create A Room &#8594;</button></Link>
+        <Link to='/Room'><button onClick={onClickFunctions} >Create A Room &#8594;</button></Link>
 
       </form>
 
@@ -170,3 +160,42 @@ const Settings = () => {
   )
 };
 export default Settings
+
+// {/* <CssTextField
+//           id="qtype"
+//           select
+//           label="Select a type"
+//           margin="normal"
+//           value={type}
+//           onChange={handleType}
+//         >
+//           <MenuItem key='Multiple' value='multiple'>Multiple Choice</MenuItem>
+//           <MenuItem key='TrueFalse' value='boolean'>True/False</MenuItem>
+//           <MenuItem key='Combonation' value=''>Combination</MenuItem>
+//         </CssTextField>
+//          */}
+
+  // const handleType = event => {
+  //   setType(event.target.value)
+  //   dispatch({
+  //     type: 'LOAD_TYPE',
+  //     payload: event.target.value
+  //   })
+  // }
+
+  // const dispatch = useDispatch()
+
+  {/* <CssTextField
+          id="username"
+          label="Username"
+          margin="normal"
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <AccountCircle />
+              </InputAdornment>
+            ),
+          }}
+          variant="standard"
+          onChange={(e) => setUsername(e.target.value)}
+        /> */}
