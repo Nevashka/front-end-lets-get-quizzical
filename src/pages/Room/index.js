@@ -8,7 +8,7 @@ import { BackButton } from '../../components';
 
   
 
-import { Questions } from '../../pages'
+
 import './style.css'
 
 const socket = io('http://localhost:5001');
