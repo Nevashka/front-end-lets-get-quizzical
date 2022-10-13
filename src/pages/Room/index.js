@@ -5,6 +5,7 @@ import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
 import { Link, Outlet, Navigate, useNavigate } from 'react-router-dom'
 import { fetchQuestions } from '../../actions';
+import { useSelector, useDispatch } from 'react-redux'
 
 import { Questions } from '../../pages'
 import './style.css'
@@ -18,6 +19,8 @@ const Room = () => {
   const [username, setUsername] = useState(null)
   const [players, setPlayers] = useState([''])
   const [redirect, setRedirect] = useState(false)
+  const [visible, setVisible] = useState(true);
+
   useEffect(() => {
     socket.on('join error', (msg) => {
       console.log(msg)
@@ -72,6 +75,15 @@ const Room = () => {
     
   }
   
+  const removeElement = () => {
+    setVisible((prev) => !prev)
+  }
+
+  function onClinckFunctions () {
+    removeElement();
+    startGame()
+  }
+
   return (
     <>
       <h1>Room</h1>
@@ -80,19 +92,19 @@ const Room = () => {
         
         <label hidden={hidden} > Username:</label>
         <input id="username" type="text" hidden={hidden} onChange={handleChangeName} style={{ backgroundColor: 'white', color: 'black' }}></input>
-        <label>Room Name:</label>
+        <label >Room: {roomName} </label>
         <input id="roomname" type="text" hidden={hidden} onChange={handleChangeRoom} style={{ backgroundColor: 'white', color: 'black' }}></input>
         <button id="join" onClick={joinRoom} hidden={hidden}>Join Room</button>
+        {visible && <Link to='Questions'><button id='play' hidden={!hidden} onClick={onClinckFunctions}>Start Game</button></Link>}
         
-        <Link to='Questions'><button id='play' hidden={!hidden} onClick={startGame}>Start Game</button></Link>
 
         <Outlet />
       </div>
 
       <div id="players">
-        <p>Players in the game: {numPlayers}</p>
-        <p> Players in game:</p>
-        <ul>
+        <p >Total players waiting: {numPlayers}</p>
+        <p hidden={hidden}> Players in game:</p>
+        <ul hidden={hidden}>
           {
             players.map((player, i) => {
               return <li key={i}>{player}</li>
