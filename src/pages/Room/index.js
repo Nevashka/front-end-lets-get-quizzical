@@ -5,6 +5,8 @@ import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
 import { Link, Outlet, Navigate, useNavigate } from 'react-router-dom'
 import { BackButton } from '../../components';
+import { useSelector } from 'react-redux'
+
   
 
 import { Questions } from '../../pages'
@@ -15,6 +17,7 @@ const socket = io('http://localhost:5001');
 const Room = () => {
   const questions = useSelector(state => state.questions)
   const [hidden, sethidden] = useState(false)
+  const [hidePlayers, setHidePlayers] = useState(false)
   const [roomName, setRoomName] = useState(null);
   const [numPlayers, setNumPlayers] = useState(0)
   const [username, setUsername] = useState(null)
@@ -48,6 +51,10 @@ const Room = () => {
       setRedirect(data)
     })
 
+    socket.on('hide for all', (data) => {
+      setHidePlayers(data)
+    })
+
     
   }, []);
   const handleQuestions = () => {
@@ -77,6 +84,8 @@ const Room = () => {
   const startGame = () => {
     console.log('starting the game')
     socket.emit('starting the game', {room: roomName})
+    socket.emit('hide players', {room: roomName})
+
     
   }
   
@@ -109,8 +118,8 @@ const Room = () => {
 
       <div id="players">
         {visible && <p>Total players waiting: {numPlayers}</p>}
-        <p hidden={hidden}> Players in game:</p>
-        <ul hidden={hidden}>
+        <p hidden={hidePlayers}> Players in game:</p>
+        <ul hidden={hidePlayers}>
           {
             players.map((player, i) => {
               return <li key={i}>{player}</li>

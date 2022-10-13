@@ -30,10 +30,13 @@ const Questions = () => {
   useEffect(() => {
     
     socket.on('load question', index => {
+      console.log('this is the index', index)
+      console.log('loading next question')
       setRenderQuestion((prev) => {
-        prev[index] = !prev[index]
+        prev[index] = true
         return[...prev]
       })
+      console.log('this is render',renderQuestion)
     })
     socket.emit('start', 'we done it')
     socket.on('send questions', (data) => {
@@ -43,6 +46,7 @@ const Questions = () => {
     
 
   }, [])
+
 
 
   const getAnswers = () => {
