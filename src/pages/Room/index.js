@@ -6,6 +6,8 @@ import io from 'socket.io-client';
 import { Link,Outlet } from 'react-router-dom'
 import { fetchQuestions } from '../../actions';
 import { useSelector, useDispatch } from 'react-redux'
+import { BackButton } from '../../components';
+  
 
 import { Questions } from '../../pages'
 import './style.css'
@@ -87,7 +89,7 @@ const Room = () => {
       </div>
 
       <div id="players">
-        <p >Total players waiting: {numPlayers}</p>
+        {visible && <p>Total players waiting: {numPlayers}</p>}
         <p hidden={hidden}> Players in game:</p>
         <ul hidden={hidden}>
           {
@@ -97,7 +99,7 @@ const Room = () => {
           }
         </ul>
       </div>
-
+      {visible && <BackButton hidden={hidden}/>}
     </>
   )
 }
