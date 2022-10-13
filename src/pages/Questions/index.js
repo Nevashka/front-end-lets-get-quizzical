@@ -15,6 +15,33 @@ const Questions = () => {
   useEffect(() => {
     socket.emit('start', 'we done it')
     getAnswers()
+  // const questions = useSelector(state => state.questions)
+  // const questionidx = useSelector(state =>state.qidx)
+  // const questions = fetchQuestions({category: category}, {difficulty: difficulty}, {type: type})
+  // console.log('questions', questions)
+  const [seconds, setSeconds] = useState(0)
+  const[Questions, setQuestions] = useState([])
+
+
+  const [renderQuestion, setRenderQuestion] = useState([false,false,false,false,false,false,false,false,false,false])
+
+  
+
+  useEffect(() => {
+    
+    socket.on('load question', index => {
+      setRenderQuestion((prev) => {
+        prev[index] = !prev[index]
+        return[...prev]
+      })
+    })
+    socket.emit('start', 'we done it')
+    socket.on('send questions', (data) => {
+      setQuestions(data)
+      console.log(data)
+    })
+    
+
   }, [])
 
 
@@ -28,8 +55,6 @@ const Questions = () => {
 
     setAnswers(options.sort(() => Math.random() - 0.5))
   };
-
-
 
 
   return (
@@ -46,6 +71,7 @@ const Questions = () => {
           }
         </div>
     </div>
+
   )
 };
 

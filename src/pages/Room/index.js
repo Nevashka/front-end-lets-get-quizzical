@@ -4,8 +4,6 @@
 import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
 import { Link, Outlet, Navigate, useNavigate } from 'react-router-dom'
-import { fetchQuestions } from '../../actions';
-import { useSelector, useDispatch } from 'react-redux'
 import { BackButton } from '../../components';
   
 
@@ -15,6 +13,7 @@ import './style.css'
 const socket = io('http://localhost:5001');
 
 const Room = () => {
+  const questions = useSelector(state => state.questions)
   const [hidden, sethidden] = useState(false)
   const [roomName, setRoomName] = useState(null);
   const [numPlayers, setNumPlayers] = useState(0)
@@ -48,9 +47,13 @@ const Room = () => {
       console.log('lets begin innit')
       setRedirect(data)
     })
+
     
   }, []);
-
+  const handleQuestions = () => {
+    socket.emit('share questions', questions)
+    
+  }
   const navigate = useNavigate()
   useEffect(() => {
     console.log('updating redirect')
@@ -81,9 +84,10 @@ const Room = () => {
     setVisible((prev) => !prev)
   }
 
-  function onClinckFunctions () {
+  function onClickFunctions () {
     removeElement();
     startGame()
+    handleQuestions()
   }
 
   return (
@@ -97,7 +101,7 @@ const Room = () => {
         <label >Room: {roomName} </label>
         <input id="roomname" type="text" hidden={hidden} onChange={handleChangeRoom} style={{ backgroundColor: 'white', color: 'black' }}></input>
         <button id="join" onClick={joinRoom} hidden={hidden}>Join Room</button>
-        {visible && <Link to='Questions'><button id='play' hidden={!hidden} onClick={onClinckFunctions}>Start Game</button></Link>}
+        {visible && <Link to='Questions'><button id='play' hidden={!hidden} onClick={onClickFunctions}>Start Game</button></Link>}
         
 
         <Outlet />

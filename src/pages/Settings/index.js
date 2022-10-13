@@ -130,13 +130,6 @@ const Settings = () => {
           id="roomName"
           label="Room Name"
           onChange={(e) => setRoomName(e.target.value)}
-          // InputProps={{
-            // startAdornment: (
-          //     <InputAdornment position="start">
-          //       {/* <AccountCircle /> */}
-          //     </InputAdornment>
-          //   ),
-          // }}
           variant="standard"
           margin="normal">
         </CssTextField>
