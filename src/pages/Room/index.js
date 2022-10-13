@@ -5,6 +5,7 @@ import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
 import { Link,Outlet } from 'react-router-dom'
 import { fetchQuestions } from '../../actions';
+import { useSelector, useDispatch } from 'react-redux'
 
 import { Questions } from '../../pages'
 import './style.css'
@@ -18,6 +19,10 @@ const Room = () => {
   const [username, setUsername] = useState(null)
   const [players, setPlayers] = useState([''])
   const [visible, setVisible] = useState(true);
+  const category = useSelector(state => state.category);
+  const difficulty = useSelector(state => state.difficulty);
+
+  
   
   useEffect(() => {
     socket.on('join error', (msg) => {
@@ -62,8 +67,6 @@ const Room = () => {
   const removeElement = () => {
     setVisible((prev) => !prev)
   }
-
-  
 
   return (
     <>
