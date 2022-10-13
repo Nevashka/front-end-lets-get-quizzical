@@ -46,6 +46,7 @@ const CssTextField = styled(TextField)({
 
 const Settings = () => {
   const [category, setCat] = useState('')
+  const [loading,setLoading] = useState(false)
   const [difficulty, setDiff] = useState('')
   const [roomName, setRoomName] = useState(null)
 
@@ -82,12 +83,14 @@ const Settings = () => {
     .then(data => {
       dispatch(setQuestions(data.results))
       console.log('in room', data.results)
+      data.results.length > 1 ? setLoading(false) : setLoading(true)
+      
     })
   }
 
   function onClickFunctions() {
     fetchQuestions();
-    createRoom()
+    loading ? console.log('i am loading the questions, wait pls'): createRoom() 
   }
 
   return (
@@ -130,13 +133,6 @@ const Settings = () => {
           id="roomName"
           label="Room Name"
           onChange={(e) => setRoomName(e.target.value)}
-          // InputProps={{
-            // startAdornment: (
-          //     <InputAdornment position="start">
-          //       {/* <AccountCircle /> */}
-          //     </InputAdornment>
-          //   ),
-          // }}
           variant="standard"
           margin="normal">
         </CssTextField>
