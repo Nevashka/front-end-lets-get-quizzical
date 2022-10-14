@@ -145,7 +145,7 @@ const Room = () => {
 
 
   const handleClick = () =>{
-    
+    setScore((prev) => prev + 0)
     console.log('nada')
     setChoice('Wrong Choice!')
   }
@@ -294,14 +294,7 @@ const Room = () => {
           </div>
           
 
-
-          <div id='qanswers'>
-          {
-            answers.map((ans, i) => {
-              return <button key={i}>{ans}</button>
-            })
-          }
-        </div>
+        
         </ul>
       </div>
         
