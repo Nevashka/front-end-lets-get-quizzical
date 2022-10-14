@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux'
 import io from 'socket.io-client';
-import { BackButton } from '../../components';
+import { BackButton, Questions } from '../../components';
 import { decode } from "html-entities";
 
 import './style.css'
