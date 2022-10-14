@@ -64,3 +64,31 @@ background-color: var(--bgBlue);
     font-size: 30px;
     text-align: center;
 }
+#players > p{
+    font-size: 20px;
+    margin: 5px;
+}
+#players > li{
+    font-size: 20px;
+    margin: 5px;
+    padding: 5px;
+    
+}
+#players > ul{
+    background-color: var(--bgBlue) ;
+    
+}
+
+#join-button > h1{
+    
+    margin: 5px;
+    padding: 5px;
+}
+
+#questions > h2{
+    font-size: 30px;
+}
+
+#questionnum {
+    font-size: 40px;
+}
