@@ -48,3 +48,19 @@ h1{
 #questions {
 background-color: var(--bgBlue);
 }
+
+.button-div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button-div>button{
+    padding: 10px;
+    margin: 10px;
+}
+
+#questions > li{
+    font-size: 30px;
+    text-align: center;
+}

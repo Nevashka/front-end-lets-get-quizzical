@@ -7,7 +7,6 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import InputAdornment from '@mui/material/InputAdornment';
 import { styled } from '@mui/material/styles'
 import MenuItem from '@mui/material/MenuItem';
-// import { Link } from '@mui/material';
 import { Categories } from '../../data'
 import './style.css'
 import { BackButton } from '../../components';
