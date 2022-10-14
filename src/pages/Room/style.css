@@ -45,6 +45,6 @@ h1{
     padding-top: 20px;
 }
 
-input, #username {
-    background-color: red;
+#questions {
+background-color: var(--bgBlue);
 }

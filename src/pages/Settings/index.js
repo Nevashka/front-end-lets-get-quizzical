@@ -90,10 +90,10 @@ const Settings = () => {
 
   function onClickFunctions() {
     fetchQuestions();
-    loading ? console.log('i am loading the questions, wait pls'): createRoom() 
+    loading ? <h4>Loading the questions...</h4>: createRoom() 
 
     
-    socket.emit('share questions', questions)
+    // socket.emit('share questions', questions)
   
   
     
