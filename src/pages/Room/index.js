@@ -2,12 +2,12 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux'
 import io from 'socket.io-client';
-import { BackButton } from '../../components';
+import { BackButton, Questions } from '../../components';
 import { decode } from "html-entities";
 
 import './style.css'
 
-const socket = io('http://localhost:5001');
+const socket = io('https://lets-get-quizzical7.herokuapp.com/');
 
 
 const Room = () => {
@@ -126,8 +126,9 @@ const Room = () => {
 
 
   const handleClick = () =>{
-    
-    setChoice('Wrong Choice!')
+    setScore((prev) => prev + 0)
+    console.log('nada')
+    setChoice('Wrong Choice! Your score is:')
   }
   const handleClickCorrect = () =>{
     setScore((prev) => prev + 10)
@@ -154,7 +155,7 @@ const Room = () => {
 
         <div id="players">
           {visible && <p>Total players waiting: {numPlayers}</p>}
-          <p hidden={!hidden}> Players in game:</p>
+          <p hidden={!hidden}> Players in game: </p>
           <ul hidden={!hidden}>
             {
               players.map((player, i) => {
@@ -261,14 +262,7 @@ const Room = () => {
           </div>
           
 
-
-          <div id='qanswers'>
-          {
-            answers.map((ans, i) => {
-              return <button key={i}>{ans}</button>
-            })
-          }
-        </div>
+        
         </ul>
       </div>
         

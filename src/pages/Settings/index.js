@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import io from 'socket.io-client'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import TextField from '@mui/material/TextField';
 import { styled } from '@mui/material/styles'
@@ -9,7 +9,7 @@ import { Categories } from '../../data'
 import './style.css'
 import { BackButton } from '../../components';
 
-const socket = io('http://localhost:5001');
+const socket = io('https://lets-get-quizzical7.herokuapp.com/');
 
 const CssTextField = styled(TextField)({
   '& label.Mui-focused': {
