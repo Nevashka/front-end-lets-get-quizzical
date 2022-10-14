@@ -7,7 +7,7 @@ import { decode } from "html-entities";
 
 import './style.css'
 
-const socket = io('http://localhost:5001');
+const socket = io('https://lets-get-quizzical7.herokuapp.com/');
 
 
 const Room = () => {

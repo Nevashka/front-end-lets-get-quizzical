@@ -11,7 +11,7 @@ import { Categories } from '../../data'
 import './style.css'
 import { BackButton } from '../../components';
 
-const socket = io('http://localhost:5001');
+const socket = io('https://lets-get-quizzical7.herokuapp.com/');
 
 const CssTextField = styled(TextField)({
   '& label.Mui-focused': {
