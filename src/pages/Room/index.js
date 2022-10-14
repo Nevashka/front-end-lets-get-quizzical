@@ -200,7 +200,7 @@ const Room = () => {
       <div>
         <h2> {questionNum} </h2>
 
-        <ul>
+        <ul id='questions'>
           
 
           
@@ -256,7 +256,7 @@ const Room = () => {
           <button hidden={!renderQuestion[9]} onClick={handleClick} disabled={buttonDisable[10]}>{decode(Questions[9].incorrect_answers[2])}</button>
           <button hidden={!renderQuestion[9]} onClick={handleClickCorrect} disabled={buttonDisable[10]}>{decode(Questions[9].correct_answer)}</button>
 
-          <div >
+          <div id='qanswers'>
           {
             answers.map((ans, i) => {
               return <button key={i}>{ans}</button>
