@@ -3,8 +3,6 @@ import io from 'socket.io-client'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import TextField from '@mui/material/TextField';
-import AccountCircle from '@mui/icons-material/AccountCircle';
-import InputAdornment from '@mui/material/InputAdornment';
 import { styled } from '@mui/material/styles'
 import MenuItem from '@mui/material/MenuItem';
 import { Categories } from '../../data'
@@ -18,7 +16,7 @@ const CssTextField = styled(TextField)({
     color: 'var(--green)',
   },
   input: {
-    color: 'white'
+    color: 'white',
   },
   label: {
     color: 'white',
@@ -54,7 +52,6 @@ const Settings = () => {
     console.log('creating room')
   }
 
-  console.log('in settings', { category }, { difficulty })
 
   const dispatch = useDispatch()
 
@@ -81,7 +78,6 @@ const Settings = () => {
     .then(response => response.json())
     .then(data => {
       dispatch(setQuestions(data.results))
-      console.log('in room', data.results)
       data.results.length > 1 ? setLoading(false) : setLoading(true)
       
     })
@@ -90,12 +86,6 @@ const Settings = () => {
   function onClickFunctions() {
     fetchQuestions();
     loading ? <h4>Loading the questions...</h4>: createRoom() 
-
-    
-    // socket.emit('share questions', questions)
-  
-  
-    
   }
 
   return (
