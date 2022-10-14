@@ -147,7 +147,7 @@ const Room = () => {
   const handleClick = () =>{
     setScore((prev) => prev + 0)
     console.log('nada')
-    setChoice('Wrong Choice!')
+    setChoice('Wrong Choice! Your score is:')
   }
   const handleClickCorrect = () =>{
     setScore((prev) => prev + 10)
