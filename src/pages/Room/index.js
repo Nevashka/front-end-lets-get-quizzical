@@ -200,7 +200,7 @@ const Room = () => {
       <div>
         <h2> {questionNum} </h2>
 
-        <ul>
+        <ul id='questions'>
           
 
           
@@ -289,7 +289,7 @@ const Room = () => {
           
 
 
-          <div >
+          <div id='qanswers'>
           {
             answers.map((ans, i) => {
               return <button key={i}>{ans}</button>

@@ -89,7 +89,17 @@ const Settings = () => {
 
   function onClickFunctions() {
     fetchQuestions();
+<<<<<<< HEAD
     loading ? console.log('i am loading the questions, wait pls'): createRoom()     
+=======
+    loading ? <h4>Loading the questions...</h4>: createRoom() 
+
+    
+    // socket.emit('share questions', questions)
+  
+  
+    
+>>>>>>> 56c882555599aee5521b0596a7cf7895bb161395
   }
 
   return (
