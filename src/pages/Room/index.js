@@ -205,56 +205,89 @@ const Room = () => {
 
           
           <li hidden={!renderQuestion[0]}>{decode(Questions[0].question)}</li>
-          <button hidden={!renderQuestion[0]} onClick={handleClick} disabled={buttonDisable[1]}>{decode(Questions[0].incorrect_answers[0])}</button>
-          <button hidden={!renderQuestion[0]} onClick={handleClick} disabled={buttonDisable[1]}>{decode(Questions[0].incorrect_answers[1])}</button>
-          <button hidden={!renderQuestion[0]} onClick={handleClick} disabled={buttonDisable[1]}>{decode(Questions[0].incorrect_answers[2])}</button>
-          <button hidden={!renderQuestion[0]} onClick={handleClickCorrect} disabled={buttonDisable[1]}>{decode(Questions[0].correct_answer)}</button>
+          <div class="button-div">
+
+            <button hidden={!renderQuestion[0]} onClick={handleClick} disabled={buttonDisable[1]}>{decode(Questions[0].incorrect_answers[0])}</button>
+            <button hidden={!renderQuestion[0]} onClick={handleClickCorrect} disabled={buttonDisable[1]}>{decode(Questions[0].correct_answer)}</button>
+            <button hidden={!renderQuestion[0]} onClick={handleClick} disabled={buttonDisable[1]}>{decode(Questions[0].incorrect_answers[1])}</button>
+            <button hidden={!renderQuestion[0]} onClick={handleClick} disabled={buttonDisable[1]}>{decode(Questions[0].incorrect_answers[2])}</button>
           
+          </div>
           <li hidden={!renderQuestion[1]}>{decode(Questions[1].question)}</li>
-          <button hidden={!renderQuestion[1]} onClick={handleClick} disabled={buttonDisable[2]}>{decode(Questions[1].incorrect_answers[0])}</button>
-          <button hidden={!renderQuestion[1]} onClick={handleClick}disabled={buttonDisable[2]}>{decode(Questions[1].incorrect_answers[1])}</button>
-          <button hidden={!renderQuestion[1]} onClick={handleClick}disabled={buttonDisable[2]}>{decode(Questions[1].incorrect_answers[2])}</button>
-          <button hidden={!renderQuestion[1]} onClick={handleClickCorrect}disabled={buttonDisable[2]}>{decode(Questions[1].correct_answer)}</button>
+
+          <div class="button-div">
+
+            <button hidden={!renderQuestion[1]} onClick={handleClick} disabled={buttonDisable[2]}>{decode(Questions[1].incorrect_answers[0])}</button>
+            <button hidden={!renderQuestion[1]} onClick={handleClick}disabled={buttonDisable[2]}>{decode(Questions[1].incorrect_answers[1])}</button>
+            <button hidden={!renderQuestion[1]} onClick={handleClickCorrect}disabled={buttonDisable[2]}>{decode(Questions[1].correct_answer)}</button>
+            <button hidden={!renderQuestion[1]} onClick={handleClick}disabled={buttonDisable[2]}>{decode(Questions[1].incorrect_answers[2])}</button>
+          </div>
           <li hidden={!renderQuestion[2]}>{decode(Questions[2].question)}</li>
-          <button hidden={!renderQuestion[2]} onClick={handleClick}disabled={buttonDisable[3]}>{decode(Questions[2].incorrect_answers[0])}</button>
-          <button hidden={!renderQuestion[2]} onClick={handleClick}disabled={buttonDisable[3]}>{decode(Questions[2].incorrect_answers[1])}</button>
-          <button hidden={!renderQuestion[2]} onClick={handleClick}disabled={buttonDisable[3]}>{decode(Questions[2].incorrect_answers[2])}</button>
-          <button hidden={!renderQuestion[2]} onClick={handleClickCorrect}disabled={buttonDisable[3]}>{decode(Questions[2].correct_answer)}</button>
+          <div class="button-div">
+            <button hidden={!renderQuestion[2]} onClick={handleClickCorrect}disabled={buttonDisable[3]}>{decode(Questions[2].correct_answer)}</button>
+            <button hidden={!renderQuestion[2]} onClick={handleClick}disabled={buttonDisable[3]}>{decode(Questions[2].incorrect_answers[0])}</button>
+            <button hidden={!renderQuestion[2]} onClick={handleClick}disabled={buttonDisable[3]}>{decode(Questions[2].incorrect_answers[1])}</button>
+            <button hidden={!renderQuestion[2]} onClick={handleClick}disabled={buttonDisable[3]}>{decode(Questions[2].incorrect_answers[2])}</button>
+
+          </div>
           <li hidden={!renderQuestion[3]}>{decode(Questions[3].question)}</li>
-          <button hidden={!renderQuestion[3]} onClick={handleClick}disabled={buttonDisable[4]}>{decode(Questions[3].incorrect_answers[0])}</button>
-          <button hidden={!renderQuestion[3]} onClick={handleClick} disabled={buttonDisable[4]}>{decode(Questions[3].incorrect_answers[1])}</button>
-          <button hidden={!renderQuestion[3]} onClick={handleClick} disabled={buttonDisable[4]}>{decode(Questions[3].incorrect_answers[2])}</button>
-          <button hidden={!renderQuestion[3]} onClick={handleClickCorrect} disabled={buttonDisable[4]}>{decode(Questions[3].correct_answer)}</button>
+          <div class="button-div">
+
+            <button hidden={!renderQuestion[3]} onClick={handleClick}disabled={buttonDisable[4]}>{decode(Questions[3].incorrect_answers[0])}</button>
+            <button hidden={!renderQuestion[3]} onClick={handleClick} disabled={buttonDisable[4]}>{decode(Questions[3].incorrect_answers[1])}</button>
+            <button hidden={!renderQuestion[3]} onClick={handleClick} disabled={buttonDisable[4]}>{decode(Questions[3].incorrect_answers[2])}</button>
+            <button hidden={!renderQuestion[3]} onClick={handleClickCorrect} disabled={buttonDisable[4]}>{decode(Questions[3].correct_answer)}</button>
+          </div>
           <li hidden={!renderQuestion[4]}>{decode(Questions[4].question)}</li>
-          <button hidden={!renderQuestion[4]} onClick={handleClick}disabled={buttonDisable[5]}>{decode(Questions[4].incorrect_answers[0])}</button>
-          <button hidden={!renderQuestion[4]} onClick={handleClick}disabled={buttonDisable[5]}>{decode(Questions[4].incorrect_answers[1])}</button>
-          <button hidden={!renderQuestion[4]} onClick={handleClick}disabled={buttonDisable[5]}>{decode(Questions[4].incorrect_answers[2])}</button>
-          <button hidden={!renderQuestion[4]} onClick={handleClickCorrect}disabled={buttonDisable[5]}>{decode(Questions[4].correct_answer)}</button>
+          <div class="button-div">
+
+            <button hidden={!renderQuestion[4]} onClick={handleClick}disabled={buttonDisable[5]}>{decode(Questions[4].incorrect_answers[0])}</button>
+            <button hidden={!renderQuestion[4]} onClick={handleClick}disabled={buttonDisable[5]}>{decode(Questions[4].incorrect_answers[1])}</button>
+            <button hidden={!renderQuestion[4]} onClick={handleClickCorrect}disabled={buttonDisable[5]}>{decode(Questions[4].correct_answer)}</button>
+            <button hidden={!renderQuestion[4]} onClick={handleClick}disabled={buttonDisable[5]}>{decode(Questions[4].incorrect_answers[2])}</button>
+          </div>
           <li hidden={!renderQuestion[5]}>{decode(Questions[5].question)}</li>
-          <button hidden={!renderQuestion[5]} onClick={handleClick}disabled={buttonDisable[6]}>{decode(Questions[5].incorrect_answers[0])}</button>
-          <button hidden={!renderQuestion[5]} onClick={handleClick}disabled={buttonDisable[6]}>{decode(Questions[5].incorrect_answers[1])}</button>
-          <button hidden={!renderQuestion[5]} onClick={handleClick}disabled={buttonDisable[6]}>{decode(Questions[5].incorrect_answers[2])}</button>
-          <button hidden={!renderQuestion[5]} onClick={handleClickCorrect}disabled={buttonDisable[6]}>{decode(Questions[5].correct_answer)}</button>
+          <div class="button-div">
+
+            <button hidden={!renderQuestion[5]} onClick={handleClick}disabled={buttonDisable[6]}>{decode(Questions[5].incorrect_answers[0])}</button>
+            <button hidden={!renderQuestion[5]} onClick={handleClickCorrect}disabled={buttonDisable[6]}>{decode(Questions[5].correct_answer)}</button>
+            <button hidden={!renderQuestion[5]} onClick={handleClick}disabled={buttonDisable[6]}>{decode(Questions[5].incorrect_answers[1])}</button>
+            <button hidden={!renderQuestion[5]} onClick={handleClick}disabled={buttonDisable[6]}>{decode(Questions[5].incorrect_answers[2])}</button>
+          </div>
           <li hidden={!renderQuestion[6]}>{decode(Questions[6].question)}</li>
-          <button hidden={!renderQuestion[6]} onClick={handleClick} disabled={buttonDisable[7]}>{decode(Questions[6].incorrect_answers[0])}</button>
-          <button hidden={!renderQuestion[6]} onClick={handleClick} disabled={buttonDisable[7]}>{decode(Questions[6].incorrect_answers[1])}</button>
-          <button hidden={!renderQuestion[6]} onClick={handleClick} disabled={buttonDisable[7]}>{decode(Questions[6].incorrect_answers[2])}</button>
-          <button hidden={!renderQuestion[6]} onClick={handleClickCorrect} disabled={buttonDisable[7]}>{decode(Questions[6].correct_answer)}</button>
+          <div class="button-div">
+
+            <button hidden={!renderQuestion[6]} onClick={handleClick} disabled={buttonDisable[7]}>{decode(Questions[6].incorrect_answers[0])}</button>
+            <button hidden={!renderQuestion[6]} onClick={handleClick} disabled={buttonDisable[7]}>{decode(Questions[6].incorrect_answers[1])}</button>
+            <button hidden={!renderQuestion[6]} onClick={handleClick} disabled={buttonDisable[7]}>{decode(Questions[6].incorrect_answers[2])}</button>
+            <button hidden={!renderQuestion[6]} onClick={handleClickCorrect} disabled={buttonDisable[7]}>{decode(Questions[6].correct_answer)}</button>
+          </div>
           <li hidden={!renderQuestion[7]}>{decode(Questions[7].question)}</li>
-          <button hidden={!renderQuestion[7]} onClick={handleClick} disabled={buttonDisable[8]}>{decode(Questions[7].incorrect_answers[0])}</button>
-          <button hidden={!renderQuestion[7]} onClick={handleClick} disabled={buttonDisable[8]}>{decode(Questions[7].incorrect_answers[1])}</button>
-          <button hidden={!renderQuestion[7]} onClick={handleClick} disabled={buttonDisable[8]}>{decode(Questions[7].incorrect_answers[2])}</button>
-          <button hidden={!renderQuestion[7]} onClick={handleClickCorrect} disabled={buttonDisable[8]}>{decode(Questions[7].correct_answer)}</button>
+          <div class="button-div">
+            <button hidden={!renderQuestion[7]} onClick={handleClickCorrect} disabled={buttonDisable[8]}>{decode(Questions[7].correct_answer)}</button>
+            <button hidden={!renderQuestion[7]} onClick={handleClick} disabled={buttonDisable[8]}>{decode(Questions[7].incorrect_answers[0])}</button>
+            <button hidden={!renderQuestion[7]} onClick={handleClick} disabled={buttonDisable[8]}>{decode(Questions[7].incorrect_answers[1])}</button>
+            <button hidden={!renderQuestion[7]} onClick={handleClick} disabled={buttonDisable[8]}>{decode(Questions[7].incorrect_answers[2])}</button>
+
+          </div>
           <li hidden={!renderQuestion[8]}>{decode(Questions[8].question)}</li>
-          <button hidden={!renderQuestion[8]} onClick={handleClick} disabled={buttonDisable[9]}>{decode(Questions[8].incorrect_answers[0])}</button>
-          <button hidden={!renderQuestion[8]} onClick={handleClick} disabled={buttonDisable[9]}>{decode(Questions[8].incorrect_answers[1])}</button>
-          <button hidden={!renderQuestion[8]} onClick={handleClick} disabled={buttonDisable[9]}>{decode(Questions[8].incorrect_answers[2])}</button>
-          <button hidden={!renderQuestion[8]} onClick={handleClickCorrect} disabled={buttonDisable[9]}>{decode(Questions[8].correct_answer)}</button>
+          <div class="button-div">
+
+            <button hidden={!renderQuestion[8]} onClick={handleClick} disabled={buttonDisable[9]}>{decode(Questions[8].incorrect_answers[0])}</button>
+            <button hidden={!renderQuestion[8]} onClick={handleClick} disabled={buttonDisable[9]}>{decode(Questions[8].incorrect_answers[1])}</button>
+            <button hidden={!renderQuestion[8]} onClick={handleClickCorrect} disabled={buttonDisable[9]}>{decode(Questions[8].correct_answer)}</button>
+            <button hidden={!renderQuestion[8]} onClick={handleClick} disabled={buttonDisable[9]}>{decode(Questions[8].incorrect_answers[2])}</button>
+          </div>
           <li hidden={!renderQuestion[9]}>{decode(Questions[9].question)}</li>
-          <button hidden={!renderQuestion[9]} onClick={handleClick} disabled={buttonDisable[10]}>{decode(Questions[9].incorrect_answers[0])}</button>
-          <button hidden={!renderQuestion[9]} onClick={handleClick} disabled={buttonDisable[10]}>{decode(Questions[9].incorrect_answers[1])}</button>
-          <button hidden={!renderQuestion[9]} onClick={handleClick} disabled={buttonDisable[10]}>{decode(Questions[9].incorrect_answers[2])}</button>
-          <button hidden={!renderQuestion[9]} onClick={handleClickCorrect} disabled={buttonDisable[10]}>{decode(Questions[9].correct_answer)}</button>
+          <div class="button-div">
+
+            <button hidden={!renderQuestion[9]} onClick={handleClick} disabled={buttonDisable[10]}>{decode(Questions[9].incorrect_answers[0])}</button>
+            <button hidden={!renderQuestion[9]} onClick={handleClick} disabled={buttonDisable[10]}>{decode(Questions[9].incorrect_answers[1])}</button>
+            <button hidden={!renderQuestion[9]} onClick={handleClickCorrect} disabled={buttonDisable[10]}>{decode(Questions[9].correct_answer)}</button>
+            <button hidden={!renderQuestion[9]} onClick={handleClick} disabled={buttonDisable[10]}>{decode(Questions[9].incorrect_answers[2])}</button>
+          </div>
+          
+
 
           <div >
           {

@@ -7,7 +7,6 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import InputAdornment from '@mui/material/InputAdornment';
 import { styled } from '@mui/material/styles'
 import MenuItem from '@mui/material/MenuItem';
-// import { Link } from '@mui/material';
 import { Categories } from '../../data'
 import './style.css'
 import { BackButton } from '../../components';
@@ -90,13 +89,7 @@ const Settings = () => {
 
   function onClickFunctions() {
     fetchQuestions();
-    loading ? console.log('i am loading the questions, wait pls'): createRoom() 
-
-    
-    socket.emit('share questions', questions)
-  
-  
-    
+    loading ? console.log('i am loading the questions, wait pls'): createRoom()     
   }
 
   return (
