@@ -187,7 +187,7 @@ const Room = () => {
 
         <div id="players">
           {visible && <p>Total players waiting: {numPlayers}</p>}
-          <p hidden={!hidden}> Players in game:</p>
+          <p hidden={!hidden}> Players in game: </p>
           <ul hidden={!hidden}>
             {
               players.map((player, i) => {
