@@ -27,47 +27,34 @@ const Room = () => {
   const [scoreState, setScoreState] = useState(false)
   const [choice, setChoice] = useState('')
 
-  // const questionidx = useSelector(state => state.qidx)
   
   const [renderQuestion, setRenderQuestion] = useState([false, false, false, false, false, false, false, false, false, false])
  
   useEffect(() => {
     socket.on('join error', (msg) => {
-      console.log(msg)
       sethidden(false)
     })
     socket.on('room full error', (msg) => {
-      console.log(msg)
       sethidden(false)
     })
     
     socket.on('room size', data => {
-      console.log(data)
       setNumPlayers(data)
     })
 
     socket.on('add player', data => {
       
-      console.log('updating players')
       setPlayers(data)
       
     })
     socket.on('Begin', data => {
-      console.log('lets begin innit')
       setVisible(false)
     })
     socket.on('send questions', (data) => {
-
-
-
       setQuestions(data)
-      
-      // console.log('data',data)
-      // setQuestions(questions)
-      // console.log(data)
     })
+
     socket.on('load question', index => {
-      console.log(`loading question ${index + 1}`)
       setRenderQuestion((prev) => {
 
         prev[index] = true
@@ -81,7 +68,6 @@ const Room = () => {
       
       
       getAnswers(index)
-      console.log(' question number',questionNum)
     })
 
     socket.on('load score', data => {
@@ -94,12 +80,9 @@ const Room = () => {
   
   
   const handleQuestions = () => {
-    console.log('sharing questions')
     socket.emit('share questions', {data:questions, room:roomName})
   }
   const getAnswers = (index) => {
-    console.log('getting answers')
-    console.log(index)
     setQuestionNum(`Question: ${index + 1}`)
     
 
@@ -114,13 +97,11 @@ const Room = () => {
     setUsername(e.target.value)
   }
   const joinRoom = () => {
-    console.log('joining room:', roomName)
-    socket.emit('join room', { room: roomName, player: username })
+   socket.emit('join room', { room: roomName, player: username })
     sethidden(!hidden) // set hidden to true
   }
   
   const startGame = () => {
-    console.log('starting the game')
     
     socket.emit('start', { room: roomName })
     
@@ -146,26 +127,12 @@ const Room = () => {
 
   const handleClick = () =>{
     
-    console.log('nada')
     setChoice('Wrong Choice!')
   }
   const handleClickCorrect = () =>{
     setScore((prev) => prev + 10)
-    console.log('Correct!')
     setChoice(`Correct! Your score is: `)
   }
-  
-  // const disableButtons = (index) => {
-
-  // }
-
-  console.log('Q',Questions)
-  console.log('q',questions)
-  console.log('answers',answers)
-  console.log('switch', renderQuestion)
-  console.log('buttons', buttonDisable)
-  console.log('Your score:', score)
-  console.log('Choice', choice)
   
 
   return (
@@ -175,7 +142,7 @@ const Room = () => {
         <div id="join-button">
           <h1 hidden={hidden}>Please join a room to play!</h1>
           <h1 hidden={!hidden}>You have joined {roomName}</h1>
-          <label hidden={hidden} > Username: {username}</label>
+          <label id='labelUser'hidden={hidden} > Username: {username}</label>
           <input id="username" type="text" hidden={hidden} onChange={handleChangeName} ></input>
           <label  hidden={hidden}>Room: {roomName} </label>
           <input id="roomname" type="text" hidden={hidden} onChange={handleChangeRoom} ></input>

@@ -7,14 +7,11 @@ const Leaderboard = () => {
   const getAllScores = () => {
     try {
       const { data } = axios.get('http://localhost:5001/players')
-      // const leaderboard = data.map( d => {'username:' d.username, 'score:'d.score})
-      // return leaderboard
     } catch (err) {
       throw new Error(err)
     }
   }
 
-  //format scores as table instead of list
   return (
     <>
     <div>Leaderboard</div>

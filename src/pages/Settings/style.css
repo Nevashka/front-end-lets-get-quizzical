@@ -22,9 +22,6 @@ button:hover {
     color: #01c9df;
 }
 
-#username {
-    margin-bottom: 5px;
-}
 
 .settings {
     background-color: var(--bgBlue);
@@ -51,4 +48,8 @@ h2 , #settings{
 
 .back {
     margin-left: 40px;
+}
+
+input, #settings{
+
 }

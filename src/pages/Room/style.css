@@ -7,7 +7,6 @@
 h1{
     font-size:40px;
     text-align: center;
-
 }
 
 
@@ -24,11 +23,26 @@ h1{
     margin: 10px;
 }
 
+
 #username,#roomname{
     padding: 5px;
-    margin: 5px;
+    margin: 20px 0px;
+    color: white;
+    background-color: transparent;
+    border: none;
+    border-bottom: 2px solid white;
+    outline: none;
+    font-size: 20px;
 }
-
+#labelUser {
+    margin-top: 30px;
+}
+#username:hover, #roomname:hover{
+    border-bottom: 2px solid #f38516;
+}
+#username:focus, #roomname:focus{
+    border-bottom: 2px solid var(--green);
+}
 #players{
     display: flex;
     flex-direction: column;
@@ -53,6 +67,7 @@ background-color: var(--bgBlue);
     display: flex;
     justify-content: center;
     align-items: center;
+    margin: 30px;
 }
 
 .button-div>button{
@@ -67,6 +82,7 @@ background-color: var(--bgBlue);
 #players > p{
     font-size: 20px;
     margin: 5px;
+    margin-top: 20px;
 }
 #players > li{
     font-size: 20px;
@@ -92,3 +108,5 @@ background-color: var(--bgBlue);
 #questionnum {
     font-size: 40px;
 }
+
+

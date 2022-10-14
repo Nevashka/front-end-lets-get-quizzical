@@ -2,7 +2,6 @@ import { bindActionCreators } from "redux";
 
 const initialState = { category: '', difficulty: '', questions: [], loading: false, qidx:0, score: 0}
 
-//store params in a single object and pass then to a reducer object called PARAMS(?)
 
 const settingsReducer = (state = initialState, action) => {
 
@@ -25,5 +24,4 @@ const settingsReducer = (state = initialState, action) => {
   }
 }
 
-// add LOAD_QUESTIONS reducer?
 export default settingsReducer;
