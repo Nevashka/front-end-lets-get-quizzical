@@ -23,8 +23,9 @@ const Room = () => {
 
   const [questionNum, setQuestionNum] = useState('loading questions...')
   const [buttonDisable, setButtonDisable] = useState([false,false, false, false, false, false, false, false, false, false, false])
-  const [score, setScore] = useState(0)
+  const [score, setScore] = useState(null)
   const [scoreState, setScoreState] = useState(false)
+  const [choice, setChoice] = useState('')
 
   // const questionidx = useSelector(state => state.qidx)
   
@@ -146,10 +147,12 @@ const Room = () => {
   const handleClick = () =>{
     
     console.log('nada')
+    setChoice('Wrong Choice!')
   }
   const handleClickCorrect = () =>{
     setScore((prev) => prev + 10)
     console.log('Correct!')
+    setChoice(`Correct! Your score is: `)
   }
   
   // const disableButtons = (index) => {
@@ -162,6 +165,7 @@ const Room = () => {
   console.log('switch', renderQuestion)
   console.log('buttons', buttonDisable)
   console.log('Your score:', score)
+  console.log('Choice', choice)
   
 
   return (
@@ -169,11 +173,12 @@ const Room = () => {
       {visible && <div id='room' >
 
         <div id="join-button">
-
-          <label hidden={hidden} > Username:</label>
-          <input id="username" type="text" hidden={hidden} onChange={handleChangeName} style={{ backgroundColor: 'white', color: 'black' }}></input>
-          <label >Room: {roomName} </label>
-          <input id="roomname" type="text" hidden={hidden} onChange={handleChangeRoom} style={{ backgroundColor: 'white', color: 'black' }}></input>
+          <h1 hidden={hidden}>Please join a room to play!</h1>
+          <h1 hidden={!hidden}>You have joined {roomName}</h1>
+          <label hidden={hidden} > Username: {username}</label>
+          <input id="username" type="text" hidden={hidden} onChange={handleChangeName} ></input>
+          <label  hidden={hidden}>Room: {roomName} </label>
+          <input id="roomname" type="text" hidden={hidden} onChange={handleChangeRoom} ></input>
           <button id="join" onClick={joinRoom} hidden={hidden}>Join Room</button>
           <button id='play' hidden={!hidden} onClick={onClickFunctions}>Start Game</button>
 
@@ -186,7 +191,7 @@ const Room = () => {
           <ul hidden={!hidden}>
             {
               players.map((player, i) => {
-                return <li key={i}>{player}</li>
+                return <li key={i} >{player}</li>
               })
             }
           </ul>
@@ -198,13 +203,14 @@ const Room = () => {
 
       {!visible &&<div id='questions' >
       <div>
-        <h2> {questionNum} </h2>
+        <h2 id="questionnum"> {questionNum} </h2>
 
         <ul id='questions'>
           
-
+          <h2>{choice}{score}</h2>
+          <h2 id="finalscore" hidden={!scoreState}>Your Final Score is: {score}</h2>
           
-          <li hidden={!renderQuestion[0]}>{decode(Questions[0].question)}</li>
+          <li hidden={!renderQuestion[0]}>1. {decode(Questions[0].question)}</li>
           <div class="button-div">
 
             <button hidden={!renderQuestion[0]} onClick={handleClick} disabled={buttonDisable[1]} style = {{backgroundColor: buttonDisable[1] ? '#778899' :'var(--bgBlue)' }}>{decode(Questions[0].incorrect_answers[0])}</button>
@@ -213,7 +219,7 @@ const Room = () => {
             <button hidden={!renderQuestion[0]} onClick={handleClick} disabled={buttonDisable[1]} style = {{backgroundColor: buttonDisable[1] ? '#778899' :'var(--bgBlue)' }}>{decode(Questions[0].incorrect_answers[2])}</button>
           
           </div>
-          <li hidden={!renderQuestion[1]}>{decode(Questions[1].question)}</li>
+          <li hidden={!renderQuestion[1]}>2. {decode(Questions[1].question)}</li>
 
           <div class="button-div">
 
@@ -222,7 +228,7 @@ const Room = () => {
             <button hidden={!renderQuestion[1]} onClick={handleClickCorrect}disabled={buttonDisable[2]} style = {{backgroundColor: buttonDisable[2] ? '#778899' :'var(--bgBlue)' }}>{decode(Questions[1].correct_answer)}</button>
             <button hidden={!renderQuestion[1]} onClick={handleClick}disabled={buttonDisable[2]} style = {{backgroundColor: buttonDisable[2] ? '#778899' :'var(--bgBlue)' }}>{decode(Questions[1].incorrect_answers[2])}</button>
           </div>
-          <li hidden={!renderQuestion[2]}>{decode(Questions[2].question)}</li>
+          <li hidden={!renderQuestion[2]}>3. {decode(Questions[2].question)}</li>
           <div class="button-div">
             <button hidden={!renderQuestion[2]} onClick={handleClickCorrect}disabled={buttonDisable[3]} style = {{backgroundColor: buttonDisable[3] ? '#778899' :'var(--bgBlue)' }}>{decode(Questions[2].correct_answer)}</button>
             <button hidden={!renderQuestion[2]} onClick={handleClick}disabled={buttonDisable[3]} style = {{backgroundColor: buttonDisable[3] ? '#778899' :'var(--bgBlue)' }}>{decode(Questions[2].incorrect_answers[0])}</button>
@@ -230,7 +236,7 @@ const Room = () => {
             <button hidden={!renderQuestion[2]} onClick={handleClick}disabled={buttonDisable[3]} style = {{backgroundColor: buttonDisable[3] ? '#778899' :'var(--bgBlue)' }}>{decode(Questions[2].incorrect_answers[2])}</button>
 
           </div>
-          <li hidden={!renderQuestion[3]}>{decode(Questions[3].question)}</li>
+          <li hidden={!renderQuestion[3]}>4. {decode(Questions[3].question)}</li>
           <div class="button-div">
 
             <button hidden={!renderQuestion[3]} onClick={handleClick}disabled={buttonDisable[4]} style = {{backgroundColor: buttonDisable[4] ? '#778899' :'var(--bgBlue)' }}>{decode(Questions[3].incorrect_answers[0])}</button>
@@ -238,7 +244,7 @@ const Room = () => {
             <button hidden={!renderQuestion[3]} onClick={handleClick} disabled={buttonDisable[4]} style = {{backgroundColor: buttonDisable[4] ? '#778899' :'var(--bgBlue)' }}>{decode(Questions[3].incorrect_answers[2])}</button>
             <button hidden={!renderQuestion[3]} onClick={handleClickCorrect} disabled={buttonDisable[4]} style = {{backgroundColor: buttonDisable[4] ? '#778899' :'var(--bgBlue)' }}>{decode(Questions[3].correct_answer)}</button>
           </div>
-          <li hidden={!renderQuestion[4]}>{decode(Questions[4].question)}</li>
+          <li hidden={!renderQuestion[4]}>5. {decode(Questions[4].question)}</li>
           <div class="button-div">
 
             <button hidden={!renderQuestion[4]} onClick={handleClick}disabled={buttonDisable[5]} style = {{backgroundColor: buttonDisable[5] ? '#778899' :'var(--bgBlue)' }}>{decode(Questions[4].incorrect_answers[0])}</button>
@@ -246,7 +252,7 @@ const Room = () => {
             <button hidden={!renderQuestion[4]} onClick={handleClickCorrect}disabled={buttonDisable[5]} style = {{backgroundColor: buttonDisable[5] ? '#778899' :'var(--bgBlue)' }}>{decode(Questions[4].correct_answer)}</button>
             <button hidden={!renderQuestion[4]} onClick={handleClick}disabled={buttonDisable[5]} style = {{backgroundColor: buttonDisable[5] ? '#778899' :'var(--bgBlue)' }}>{decode(Questions[4].incorrect_answers[2])}</button>
           </div>
-          <li hidden={!renderQuestion[5]}>{decode(Questions[5].question)}</li>
+          <li hidden={!renderQuestion[5]}>6. {decode(Questions[5].question)}</li>
           <div class="button-div">
 
             <button hidden={!renderQuestion[5]} onClick={handleClick}disabled={buttonDisable[6]} style = {{backgroundColor: buttonDisable[6] ? '#778899' :'var(--bgBlue)' }}>{decode(Questions[5].incorrect_answers[0])}</button>
@@ -254,7 +260,7 @@ const Room = () => {
             <button hidden={!renderQuestion[5]} onClick={handleClick}disabled={buttonDisable[6]} style = {{backgroundColor: buttonDisable[6] ? '#778899' :'var(--bgBlue)' }}>{decode(Questions[5].incorrect_answers[1])}</button>
             <button hidden={!renderQuestion[5]} onClick={handleClick}disabled={buttonDisable[6]} style = {{backgroundColor: buttonDisable[6] ? '#778899' :'var(--bgBlue)' }}>{decode(Questions[5].incorrect_answers[2])}</button>
           </div>
-          <li hidden={!renderQuestion[6]}>{decode(Questions[6].question)}</li>
+          <li hidden={!renderQuestion[6]}>7. {decode(Questions[6].question)}</li>
           <div class="button-div">
 
             <button hidden={!renderQuestion[6]} onClick={handleClick} disabled={buttonDisable[7]} style = {{backgroundColor: buttonDisable[7] ? '#778899' :'var(--bgBlue)' }}>{decode(Questions[6].incorrect_answers[0])}</button>
@@ -262,7 +268,7 @@ const Room = () => {
             <button hidden={!renderQuestion[6]} onClick={handleClick} disabled={buttonDisable[7]} style = {{backgroundColor: buttonDisable[7] ? '#778899' :'var(--bgBlue)' }}>{decode(Questions[6].incorrect_answers[2])}</button>
             <button hidden={!renderQuestion[6]} onClick={handleClickCorrect} disabled={buttonDisable[7]} style = {{backgroundColor: buttonDisable[7] ? '#778899' :'var(--bgBlue)' }}>{decode(Questions[6].correct_answer)}</button>
           </div>
-          <li hidden={!renderQuestion[7]}>{decode(Questions[7].question)}</li>
+          <li hidden={!renderQuestion[7]}>8. {decode(Questions[7].question)}</li>
           <div class="button-div">
             <button hidden={!renderQuestion[7]} onClick={handleClickCorrect} disabled={buttonDisable[8]} style = {{backgroundColor: buttonDisable[8] ? '#778899' :'var(--bgBlue)' }}>{decode(Questions[7].correct_answer)}</button>
             <button hidden={!renderQuestion[7]} onClick={handleClick} disabled={buttonDisable[8]} style = {{backgroundColor: buttonDisable[8] ? '#778899' :'var(--bgBlue)' }}>{decode(Questions[7].incorrect_answers[0])}</button>
@@ -270,7 +276,7 @@ const Room = () => {
             <button hidden={!renderQuestion[7]} onClick={handleClick} disabled={buttonDisable[8]} style = {{backgroundColor: buttonDisable[8] ? '#778899' :'var(--bgBlue)' }}>{decode(Questions[7].incorrect_answers[2])}</button>
 
           </div>
-          <li hidden={!renderQuestion[8]}>{decode(Questions[8].question)}</li>
+          <li hidden={!renderQuestion[8]}>9. {decode(Questions[8].question)}</li>
           <div class="button-div">
 
             <button hidden={!renderQuestion[8]} onClick={handleClick} disabled={buttonDisable[9]} style = {{backgroundColor: buttonDisable[9] ? '#778899' :'var(--bgBlue)' }}>{decode(Questions[8].incorrect_answers[0])}</button>
@@ -278,7 +284,7 @@ const Room = () => {
             <button hidden={!renderQuestion[8]} onClick={handleClickCorrect} disabled={buttonDisable[9]} style = {{backgroundColor: buttonDisable[9] ? '#778899' :'var(--bgBlue)' }}>{decode(Questions[8].correct_answer)}</button>
             <button hidden={!renderQuestion[8]} onClick={handleClick} disabled={buttonDisable[9]} style = {{backgroundColor: buttonDisable[9] ? '#778899' :'var(--bgBlue)' }}>{decode(Questions[8].incorrect_answers[2])}</button>
           </div>
-          <li hidden={!renderQuestion[9]}>{decode(Questions[9].question)}</li>
+          <li hidden={!renderQuestion[9]}>10. {decode(Questions[9].question)}</li>
           <div class="button-div">
 
             <button hidden={!renderQuestion[9]} onClick={handleClick} disabled={buttonDisable[10]} style = {{backgroundColor: buttonDisable[10] ? '#778899' :'var(--bgBlue)' }}>{decode(Questions[9].incorrect_answers[0])}</button>
@@ -298,7 +304,6 @@ const Room = () => {
         </div>
         </ul>
       </div>
-      <p hidden={!scoreState}>Your Score:{score}</p>
         
            
 
